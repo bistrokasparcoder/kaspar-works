@@ -60,7 +60,7 @@ const Flagship: React.FC = () => {
 
             {/* CTA */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pt-4">
-              <Button className="pl-8 pr-8 bg-white text-black hover:bg-slate-200 shadow-[0_0_20px_rgba(255,255,255,0.3)] border-none">
+              <Button className="pl-8 pr-8 bg-white !text-black hover:bg-slate-200 shadow-[0_0_20px_rgba(255,255,255,0.3)] border-none font-bold">
                 Get the App
               </Button>
               <div className="flex items-center gap-3 text-sm text-slate-400">
@@ -71,7 +71,7 @@ const Flagship: React.FC = () => {
                      </div>
                    ))}
                 </div>
-                <span>Joined by 10k+ believers</span>
+                <span>Joined by 1k+ believers</span>
               </div>
             </div>
           </div>
@@ -95,48 +95,13 @@ const Flagship: React.FC = () => {
                 {/* Frame */}
                 <div className="relative bg-slate-950 border-[6px] border-slate-800 rounded-[3rem] overflow-hidden h-[600px] ring-1 ring-white/20">
                     {/* Screen */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-950 flex flex-col">
-                        {/* Status Bar */}
-                        <div className="h-14 flex justify-between items-center px-6 text-white/50 text-xs">
-                           <span>9:41</span>
-                           <div className="flex gap-1"><div className="w-4 h-4 rounded-full border border-current"></div></div>
-                        </div>
-                        
-                        {/* App Header */}
-                        <div className="px-6 pt-2 pb-6">
-                           <div className="flex justify-between items-end mb-6">
-                              <div>
-                                 <p className="text-slate-400 text-xs uppercase tracking-wider mb-1">Thursday, 24th</p>
-                                 <h3 className="text-white text-2xl font-serif">Daily Devotion</h3>
-                              </div>
-                              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white"><Users size={18}/></div>
-                           </div>
-
-                           {/* Featured Card */}
-                           <div className="relative aspect-[4/5] bg-indigo-600 rounded-3xl p-6 flex flex-col justify-between overflow-hidden group cursor-pointer shadow-lg shadow-indigo-900/40">
-                              {/* Image/Gradient Background */}
-                              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1507692049790-de58293a469d?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-60 mix-blend-overlay transition-transform duration-700 group-hover:scale-110"></div>
-                              <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/90 to-transparent"></div>
-                              
-                              <div className="relative z-10 flex justify-between items-start">
-                                 <div className="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs text-white font-medium">Verse of the Day</div>
-                                 <Heart className="text-white/70" size={20} />
-                              </div>
-
-                              <div className="relative z-10 space-y-3">
-                                 <p className="text-white font-serif text-xl leading-snug">"Be strong and courageous. Do not be afraid; do not be discouraged."</p>
-                                 <p className="text-indigo-200 text-sm font-medium">Joshua 1:9</p>
-                              </div>
-                           </div>
-                        </div>
-
-                        {/* Bottom Nav */}
-                        <div className="mt-auto h-20 bg-slate-900/80 backdrop-blur-md border-t border-white/5 flex justify-around items-center text-slate-500">
-                           <div className="text-indigo-400"><Star size={24}/></div>
-                           <BookOpen size={24}/>
-                           <MessageCircle size={24}/>
-                           <Users size={24}/>
-                        </div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-950">
+                        {/* App Screenshot */}
+                        <img
+                           src="/Inspired By The Cross 1.png"
+                           alt="The Cross App - Inspired By The Cross"
+                           className="w-full h-full object-cover object-center"
+                        />
                     </div>
                 </div>
              </div>

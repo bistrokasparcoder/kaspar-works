@@ -1,0 +1,20 @@
+# Ignore all .log files
+*.log
+
+# Ignore the build directory
+build/
+
+# Ignore node_modules directory commonly used in JavaScript projects
+node_modules/
+
+# Ignore operating system specific files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE specific files (e.g., for VS Code)
+.vscode/
+
+# Ignore environment variables file
+.env
+
+dist

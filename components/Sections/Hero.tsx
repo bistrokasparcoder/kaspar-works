@@ -142,24 +142,36 @@ const Hero: React.FC<HeroProps> = ({ onOpenContact }) => {
         
         {/* Main Heading - Masked Reveal Animation */}
         <h1 className="max-w-4xl mx-auto text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter text-slate-950 leading-[1.1] sm:leading-[0.95] mb-8">
-          {/* Line 1 */}
-          <div className="block overflow-hidden mb-1 sm:mb-2">
-            <span className="block animate-reveal-up opacity-0" style={{ animationDelay: '200ms' }}>
-              Design that
+          {/* Line 1: "Design that" */}
+          <div className="block overflow-hidden mb-1 sm:mb-2 pb-2">
+            <span className="block">
+              <span className="inline-flex text-slate-900">
+                {['D', 'e', 's', 'i', 'g', 'n', ' ', 't', 'h', 'a', 't'].map((char, idx) => (
+                  <span
+                    key={idx}
+                    className="inline-block opacity-0 animate-[soulReveal_0.8s_cubic-bezier(0.34,1.56,0.64,1)_forwards]"
+                    style={{
+                      animationDelay: `${200 + idx * 50}ms`,
+                    }}
+                  >
+                    {char === ' ' ? '\u00A0' : char}
+                  </span>
+                ))}
+              </span>
             </span>
           </div>
-          
-          {/* Line 2 with Gradient - Enhanced Soul-Moving Animation */}
+
+          {/* Line 2: "Moves the Soul" with Gradient */}
           <div className="block relative overflow-visible">
-             <div className="overflow-hidden pb-4 -mb-4 px-2 -mx-2">
+             <div className="overflow-hidden pb-6 -mb-4 px-2 -mx-2">
                 <span className="block">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 bg-[length:200%_auto] animate-shimmer-slow relative z-10 inline-flex">
+                  <span className="relative z-10 inline-flex text-slate-900">
                     {['M', 'o', 'v', 'e', 's', ' ', 't', 'h', 'e', ' ', 'S', 'o', 'u', 'l'].map((char, idx) => (
                       <span
                         key={idx}
                         className="inline-block opacity-0 animate-[soulReveal_0.8s_cubic-bezier(0.34,1.56,0.64,1)_forwards]"
                         style={{
-                          animationDelay: `${350 + idx * 50}ms`,
+                          animationDelay: `${750 + idx * 50}ms`,
                         }}
                       >
                         {char === ' ' ? '\u00A0' : char}
