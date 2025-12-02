@@ -140,39 +140,38 @@ const Hero: React.FC<HeroProps> = ({ onOpenContact }) => {
           </div>
         </div>
         
-        {/* Main Heading - Masked Reveal Animation */}
-        <h1 className="max-w-4xl mx-auto text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter text-slate-950 leading-[1.1] sm:leading-[0.95] mb-8">
-          {/* Line 1 */}
-          <div className="block overflow-hidden mb-1 sm:mb-2">
-            <span className="block animate-reveal-up opacity-0" style={{ animationDelay: '200ms' }}>
-              Design that
-            </span>
-          </div>
-          
-          {/* Line 2 with Gradient - Enhanced Soul-Moving Animation */}
-          <div className="block relative overflow-visible">
-             <div className="overflow-hidden pb-4 -mb-4 px-2 -mx-2">
-                <span className="block">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 bg-[length:200%_auto] animate-shimmer-slow relative z-10 inline-flex">
-                    {['M', 'o', 'v', 'e', 's', ' ', 't', 'h', 'e', ' ', 'S', 'o', 'u', 'l'].map((char, idx) => (
-                      <span
-                        key={idx}
-                        className="inline-block opacity-0 animate-[soulReveal_0.8s_cubic-bezier(0.34,1.56,0.64,1)_forwards]"
-                        style={{
-                          animationDelay: `${350 + idx * 50}ms`,
-                        }}
-                      >
-                        {char === ' ' ? '\u00A0' : char}
-                      </span>
-                    ))}
-                  </span>
+        {/* Main Heading - Elegant Fade Animation */}
+        <h1 className="max-w-4xl mx-auto text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.1] sm:leading-[0.95] mb-8 relative">
+          <div className="relative inline-block">
+            {/* Main Text with Staggered Word Animation */}
+            <div className="text-center space-x-3 sm:space-x-4">
+              <span className="inline-block opacity-0 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+                <span className="text-slate-950">Design</span>
+              </span>
+              <span className="inline-block opacity-0 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
+                <span className="text-slate-950">that</span>
+              </span>
+              <span className="inline-block opacity-0 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
+                <span className="relative">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 animate-shimmer-slow bg-[length:200%_auto]">Moves</span>
                 </span>
-             </div>
+              </span>
+              <span className="inline-block opacity-0 animate-fade-in-up" style={{ animationDelay: '800ms' }}>
+                <span className="text-slate-950">the</span>
+              </span>
+              <span className="inline-block opacity-0 animate-fade-in-up" style={{ animationDelay: '1000ms' }}>
+                <span className="relative">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 animate-shimmer-slow bg-[length:200%_auto]">Soul</span>
+                  {/* Underline accent */}
+                  <span className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-0 animate-fade-in-up" style={{ animationDelay: '1200ms' }}></span>
+                </span>
+              </span>
+            </div>
 
-            {/* Multi-layered Glow Effect */}
-            <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[80%] h-[40%] bg-blue-200/50 -z-0 blur-3xl rounded-full opacity-0 animate-fade-in-up" style={{ animationDelay: '800ms' }}></span>
-            <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[60%] h-[30%] bg-purple-200/40 -z-0 blur-2xl rounded-full opacity-0 animate-fade-in-up" style={{ animationDelay: '900ms' }}></span>
-            <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[60%] bg-cyan-100/30 -z-0 blur-xl rounded-full opacity-0 animate-fade-in-up" style={{ animationDelay: '1000ms' }}></span>
+            {/* Subtle Glow */}
+            <div className="absolute inset-0 -z-10 blur-3xl opacity-0 animate-fade-in-up" style={{ animationDelay: '1400ms' }}>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-r from-blue-200/30 via-purple-200/30 to-pink-200/30 rounded-full"></div>
+            </div>
           </div>
         </h1>
         

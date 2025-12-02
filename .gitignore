@@ -1,0 +1,20 @@
+# Node modules
+node_modules/
+
+# Compiled TypeScript output
+# This assumes your output directory is 'dist'. Adjust if you use 'build' or another name.
+dist/
+*.js
+*.js.map
+
+# IDE and OS specific files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+
+# Logs
+*.log

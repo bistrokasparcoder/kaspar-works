@@ -82,11 +82,35 @@ const NaturalForm: React.FC<NaturalFormProps> = ({ onClose, className = '' }) =>
     if (!formState.name || !formState.email) return;
 
     setStatus('submitting');
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setStatus('success');
+
+    try {
+      // Send email using FormSubmit service
+      const response = await fetch('https://formsubmit.co/kaspar@kaspar.works', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          interest: formState.interest,
+          details: formState.details || 'No additional details provided',
+          _subject: `New Project Inquiry: ${formState.interest} from ${formState.name}`,
+          _template: 'table'
+        })
+      });
+
+      if (response.ok) {
+        setStatus('success');
+      } else {
+        throw new Error('Failed to send email');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Failed to send message. Please try emailing us directly at kaspar@kaspar.works');
+      setStatus('idle');
+    }
   };
 
   if (status === 'success') {
