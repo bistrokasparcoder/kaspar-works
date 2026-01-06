@@ -60,7 +60,10 @@ const Flagship: React.FC = () => {
 
             {/* CTA */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pt-4">
-              <Button className="pl-8 pr-8 bg-white !text-black hover:bg-slate-200 shadow-[0_0_20px_rgba(255,255,255,0.3)] border-none">
+              <Button
+                onClick={() => window.open('https://apps.apple.com/us/app/inspired-by-the-cross/id6742165428', '_blank')}
+                className="pl-8 pr-8 bg-white !text-black hover:bg-slate-200 shadow-[0_0_20px_rgba(255,255,255,0.3)] border-none"
+              >
                 Get the App
               </Button>
               <div className="flex items-center gap-3 text-sm text-slate-400">
@@ -76,13 +79,48 @@ const Flagship: React.FC = () => {
             </div>
           </div>
 
-          {/* Visual Side - 3D Mockup Construction */}
-          <div className="flex-1 w-full max-w-[500px] lg:max-w-none [perspective:1000px] relative mt-12 lg:mt-0">
+          {/* Visual Side - Multi-device Mockup */}
+          <div className="flex-1 w-full max-w-[600px] lg:max-w-none relative mt-12 lg:mt-0 min-h-[600px]">
              {/* Glowing Halo */}
-             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-indigo-500/20 blur-[100px] rounded-full"></div>
-             
+             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-500/20 blur-[100px] rounded-full animate-pulse"></div>
+
+             {/* Desktop/Web Mockup - Background */}
+             <div className="absolute top-8 left-0 right-0 z-0 mx-auto w-full max-w-[480px] transform hover:scale-[1.02] transition-transform duration-500">
+                {/* Browser Window */}
+                <div className="bg-slate-900 rounded-2xl shadow-2xl shadow-indigo-500/20 border border-slate-700 overflow-hidden ring-2 ring-indigo-500/10">
+                   {/* Browser Header */}
+                   <div className="bg-slate-800 px-4 py-3 flex items-center gap-2 border-b border-slate-700">
+                      <div className="flex gap-2">
+                         <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                         <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                         <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                      </div>
+                      <div className="flex-1 ml-4 bg-slate-700/50 rounded px-3 py-1 text-xs text-slate-400 flex items-center gap-2">
+                         <BookOpen size={12} className="text-indigo-400" />
+                         <span>inspiredbythecross.com</span>
+                      </div>
+                   </div>
+                   {/* Browser Content */}
+                   <div className="relative bg-slate-950 h-[320px] overflow-hidden">
+                      <div className="absolute inset-0 bg-[url('/inspired-web-screenshot.png')] bg-cover bg-top"></div>
+                   </div>
+                </div>
+             </div>
+
+             {/* Phone Mockup - Foreground */}
+             <div className="relative z-10 ml-auto mr-8 w-[280px] shadow-2xl shadow-indigo-500/40 rounded-[2.5rem] transform hover:scale-105 transition-transform duration-500 mt-40">
+                {/* Frame */}
+                <div className="relative bg-slate-950 border-[8px] border-slate-800 rounded-[2.5rem] overflow-hidden h-[560px] ring-2 ring-indigo-500/30">
+                    {/* Screen */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-950">
+                        {/* Screenshot */}
+                        <div className="absolute inset-0 bg-[url('/screenhot-inspired-by-the-cross1.png')] bg-cover bg-center"></div>
+                    </div>
+                </div>
+             </div>
+
              {/* Floating Elements Layer 1 (Back) */}
-             <div className="absolute top-20 -left-10 w-40 p-4 rounded-xl bg-slate-900/80 backdrop-blur-xl border border-white/10 z-0 animate-float hidden md:block">
+             <div className="absolute top-4 -left-8 w-40 p-4 rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/10 z-20 animate-float hidden xl:block shadow-2xl shadow-indigo-500/20">
                 <div className="flex items-center gap-3 mb-2">
                    <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400"><Users size={14}/></div>
                    <div className="h-2 w-16 bg-white/10 rounded-full"></div>
@@ -90,20 +128,8 @@ const Flagship: React.FC = () => {
                 <div className="h-2 w-24 bg-white/5 rounded-full"></div>
              </div>
 
-             {/* Phone Main */}
-             <div className="relative z-10 mx-auto w-[300px] rotate-y-[-12deg] rotate-x-[5deg] hover:rotate-0 transition-transform duration-700 ease-out-expo shadow-2xl shadow-indigo-500/20 rounded-[3rem]">
-                {/* Frame */}
-                <div className="relative bg-slate-950 border-[6px] border-slate-800 rounded-[3rem] overflow-hidden h-[600px] ring-1 ring-white/20">
-                    {/* Screen */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-950">
-                        {/* Full Screen Screenshot */}
-                        <div className="absolute inset-0 bg-[url('/screenhot-inspired-by-the-cross1.png')] bg-cover bg-center"></div>
-                    </div>
-                </div>
-             </div>
-
              {/* Floating Elements Layer 2 (Front) */}
-             <div className="absolute bottom-40 -right-12 w-48 p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 z-20 shadow-xl animate-float-delayed hidden md:block">
+             <div className="absolute bottom-20 -right-4 w-48 p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 z-20 shadow-xl animate-float-delayed hidden xl:block">
                 <div className="flex items-center gap-3 mb-2">
                    <div className="w-8 h-8 rounded-full bg-amber-400/20 flex items-center justify-center text-amber-400"><MessageCircle size={14} /></div>
                    <div>

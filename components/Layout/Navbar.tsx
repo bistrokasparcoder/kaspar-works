@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 interface NavbarProps {
@@ -9,7 +10,8 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  
+  const location = useLocation();
+
   // State for the sliding pill animation
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const navRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
@@ -47,16 +49,30 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
     };
   }, []);
 
-  // Update sliding pill position when activeSection changes
+  // Update sliding pill position when activeSection or location changes
   useEffect(() => {
     const updateIndicator = () => {
-      const activeElement = navRefs.current[activeSection];
-      if (activeElement) {
-        setIndicatorStyle({
-          left: activeElement.offsetLeft,
-          width: activeElement.offsetWidth,
-          opacity: 1
-        });
+      // Check if we're on a route page
+      if (location.pathname === '/apps') {
+        const activeElement = navRefs.current['/apps'];
+        if (activeElement) {
+          setIndicatorStyle({
+            left: activeElement.offsetLeft,
+            width: activeElement.offsetWidth,
+            opacity: 1
+          });
+        }
+      } else if (activeSection) {
+        const activeElement = navRefs.current[activeSection];
+        if (activeElement) {
+          setIndicatorStyle({
+            left: activeElement.offsetLeft,
+            width: activeElement.offsetWidth,
+            opacity: 1
+          });
+        } else {
+          setIndicatorStyle(prev => ({ ...prev, opacity: 0 }));
+        }
       } else {
         setIndicatorStyle(prev => ({ ...prev, opacity: 0 }));
       }
@@ -66,12 +82,12 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
     // Recalculate on resize to maintain correct positioning
     window.addEventListener('resize', updateIndicator);
     return () => window.removeEventListener('resize', updateIndicator);
-  }, [activeSection]);
+  }, [activeSection, location.pathname]);
 
   const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Mission', href: '#mission' },
-    { name: 'Flagship', href: '#flagship' },
+    { name: 'About', href: '#about', isRoute: false },
+    { name: 'Apps', href: '/apps', isRoute: true },
+    { name: 'Mission', href: '#mission', isRoute: false },
   ];
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -109,13 +125,17 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
         `}>
           
           {/* Logo */}
-          <a 
-            href="#" 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          <Link
+            to="/"
+            onClick={() => {
+              if (location.pathname === '/') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
             className="text-xl font-bold tracking-tight text-slate-900 shrink-0 cursor-pointer"
           >
             Kaspar<span className="text-slate-400">Works</span>
-          </a>
+          </Link>
 
           {/* Desktop Links with Sliding Pill Animation */}
           <div className="hidden md:flex relative items-center bg-slate-100/50 p-1.5 rounded-full">
@@ -133,16 +153,37 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
             />
 
             {navLinks.map((link) => {
-              const isActive = activeSection === link.href.substring(1);
+              const isActive = link.isRoute
+                ? location.pathname === link.href
+                : activeSection === link.href.substring(1);
+
+              if (link.isRoute) {
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    ref={(el) => { navRefs.current[link.href] = el; }}
+                    onClick={() => setIsOpen(false)}
+                    className={`relative z-10 px-5 py-2 text-sm font-medium rounded-full transition-colors duration-300 ${
+                      isActive
+                        ? 'text-slate-900'
+                        : 'text-slate-500 hover:text-slate-900'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              }
+
               return (
-                <a 
-                  key={link.name} 
+                <a
+                  key={link.name}
                   href={link.href}
                   ref={(el) => { navRefs.current[link.href.substring(1)] = el; }}
-                  onClick={(e) => scrollToSection(e, link.href)} 
+                  onClick={(e) => scrollToSection(e, link.href)}
                   className={`relative z-10 px-5 py-2 text-sm font-medium rounded-full transition-colors duration-300 ${
-                    isActive 
-                      ? 'text-slate-900' 
+                    isActive
+                      ? 'text-slate-900'
                       : 'text-slate-500 hover:text-slate-900'
                   }`}
                 >
@@ -175,20 +216,41 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
       {/* Mobile Menu Overlay */}
       <div className={`fixed inset-0 z-40 bg-white/95 backdrop-blur-xl transition-all duration-300 md:hidden flex items-center justify-center ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div className="text-center space-y-6">
-          {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href}
-              className={`block text-2xl font-medium transition-colors ${
-                activeSection === link.href.substring(1) ? 'text-blue-600' : 'text-slate-900 hover:text-blue-600'
-              }`}
-              onClick={(e) => scrollToSection(e, link.href)}
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = link.isRoute
+              ? location.pathname === link.href
+              : activeSection === link.href.substring(1);
+
+            if (link.isRoute) {
+              return (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className={`block text-2xl font-medium transition-colors ${
+                    isActive ? 'text-blue-600' : 'text-slate-900 hover:text-blue-600'
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              );
+            }
+
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                className={`block text-2xl font-medium transition-colors ${
+                  isActive ? 'text-blue-600' : 'text-slate-900 hover:text-blue-600'
+                }`}
+                onClick={(e) => scrollToSection(e, link.href)}
+              >
+                {link.name}
+              </a>
+            );
+          })}
           <div className="pt-8">
-             <button 
+             <button
                 onClick={handleContactClick}
                 className="inline-block px-8 py-3 text-lg font-medium text-white bg-slate-900 rounded-full shadow-lg hover:scale-105 transition-transform"
               >
