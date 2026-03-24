@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavbarProps {
   onOpenContact?: () => void;
@@ -12,76 +13,41 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
   const [activeSection, setActiveSection] = useState('');
   const location = useLocation();
 
-  // State for the sliding pill animation
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const navRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Track active section via IntersectionObserver
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '-30% 0px -40% 0px', // Active when section occupies middle of screen
-      threshold: 0
-    };
-
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const observer = new IntersectionObserver(
+      (entries) => { entries.forEach((e) => { if (e.isIntersecting) setActiveSection(e.target.id); }); },
+      { rootMargin: '-30% 0px -40% 0px', threshold: 0 }
+    );
     const sections = document.querySelectorAll('section[id]');
-    sections.forEach((section) => observer.observe(section));
-
-    return () => {
-      sections.forEach((section) => observer.unobserve(section));
-    };
+    sections.forEach((s) => observer.observe(s));
+    return () => { sections.forEach((s) => observer.unobserve(s)); };
   }, []);
 
-  // Update sliding pill position when activeSection or location changes
   useEffect(() => {
-    const updateIndicator = () => {
-      // Check if we're on a route page
+    const update = () => {
       if (location.pathname === '/apps') {
-        const activeElement = navRefs.current['/apps'];
-        if (activeElement) {
-          setIndicatorStyle({
-            left: activeElement.offsetLeft,
-            width: activeElement.offsetWidth,
-            opacity: 1
-          });
-        }
+        const el = navRefs.current['/apps'];
+        if (el) setIndicatorStyle({ left: el.offsetLeft, width: el.offsetWidth, opacity: 1 });
       } else if (activeSection) {
-        const activeElement = navRefs.current[activeSection];
-        if (activeElement) {
-          setIndicatorStyle({
-            left: activeElement.offsetLeft,
-            width: activeElement.offsetWidth,
-            opacity: 1
-          });
-        } else {
-          setIndicatorStyle(prev => ({ ...prev, opacity: 0 }));
-        }
+        const el = navRefs.current[activeSection];
+        if (el) setIndicatorStyle({ left: el.offsetLeft, width: el.offsetWidth, opacity: 1 });
+        else setIndicatorStyle(p => ({ ...p, opacity: 0 }));
       } else {
-        setIndicatorStyle(prev => ({ ...prev, opacity: 0 }));
+        setIndicatorStyle(p => ({ ...p, opacity: 0 }));
       }
     };
-
-    updateIndicator();
-    // Recalculate on resize to maintain correct positioning
-    window.addEventListener('resize', updateIndicator);
-    return () => window.removeEventListener('resize', updateIndicator);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
   }, [activeSection, location.pathname]);
 
   const navLinks = [
@@ -92,101 +58,61 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      // Optimistically set active section for instant animation response
-      setActiveSection(targetId); 
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false);
-    }
+    const id = href.replace('#', '');
+    const el = document.getElementById(id);
+    if (el) { setActiveSection(id); el.scrollIntoView({ behavior: 'smooth' }); setIsOpen(false); }
   };
 
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (onOpenContact) {
-      onOpenContact();
-      setIsOpen(false);
-    } else {
-      window.location.href = "mailto:kaspar@kaspar.works";
-    }
+    if (onOpenContact) { onOpenContact(); setIsOpen(false); }
+    else window.location.href = "mailto:kaspar@kaspar.works";
   };
 
   return (
     <>
-      <nav 
-        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[90%] md:w-auto
-        ${scrolled || isOpen ? 'max-w-4xl' : 'max-w-5xl'} 
-        `}
+      <motion.nav
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed top-5 left-1/2 -translate-x-1/2 z-50 w-[92%] md:w-auto ${scrolled || isOpen ? 'max-w-4xl' : 'max-w-5xl'} transition-all duration-500`}
       >
         <div className={`
-          relative px-6 py-3 rounded-full border border-white/20 shadow-xl shadow-slate-200/20
-          backdrop-blur-xl bg-white/80 transition-all duration-300 flex items-center justify-between md:justify-start gap-8
+          relative px-5 py-2.5 rounded-full transition-all duration-500 flex items-center justify-between md:justify-start gap-6
+          ${scrolled
+            ? 'bg-surface-50/80 backdrop-blur-2xl border border-white/[0.08] shadow-2xl shadow-black/40'
+            : 'bg-surface-50/40 backdrop-blur-xl border border-white/[0.04]'
+          }
         `}>
-          
-          {/* Logo */}
           <Link
             to="/"
-            onClick={() => {
-              if (location.pathname === '/') {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }
-            }}
-            className="text-xl font-bold tracking-tight text-slate-900 shrink-0 cursor-pointer"
+            onClick={() => { if (location.pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            className="font-display text-lg font-bold tracking-tight text-white shrink-0"
           >
-            Kaspar<span className="text-slate-400">Works</span>
+            Kaspar<span className="text-slate-500">Works</span>
           </Link>
 
-          {/* Desktop Links with Sliding Pill Animation */}
-          <div className="hidden md:flex relative items-center bg-slate-100/50 p-1.5 rounded-full">
-            
-            {/* The Animated Sliding Pill */}
-            <div 
-              className="absolute bg-white shadow-sm rounded-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]"
-              style={{
-                left: indicatorStyle.left,
-                width: indicatorStyle.width,
-                opacity: indicatorStyle.opacity,
-                height: 'calc(100% - 12px)', // Matches parent padding (p-1.5 = 6px * 2 = 12px)
-                top: '6px'
-              }}
+          {/* Desktop Links */}
+          <div className="hidden md:flex relative items-center bg-white/[0.03] p-1 rounded-full">
+            <motion.div
+              className="absolute bg-white/[0.08] rounded-full"
+              animate={{ left: indicatorStyle.left, width: indicatorStyle.width, opacity: indicatorStyle.opacity }}
+              transition={{ type: "spring", stiffness: 350, damping: 30 }}
+              style={{ height: 'calc(100% - 8px)', top: '4px' }}
             />
-
             {navLinks.map((link) => {
-              const isActive = link.isRoute
-                ? location.pathname === link.href
-                : activeSection === link.href.substring(1);
-
+              const isActive = link.isRoute ? location.pathname === link.href : activeSection === link.href.substring(1);
               if (link.isRoute) {
                 return (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    ref={(el) => { navRefs.current[link.href] = el; }}
-                    onClick={() => setIsOpen(false)}
-                    className={`relative z-10 px-5 py-2 text-sm font-medium rounded-full transition-colors duration-300 ${
-                      isActive
-                        ? 'text-slate-900'
-                        : 'text-slate-500 hover:text-slate-900'
-                    }`}
-                  >
+                  <Link key={link.name} to={link.href} ref={(el) => { navRefs.current[link.href] = el; }} onClick={() => setIsOpen(false)}
+                    className={`relative z-10 px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-300 ${isActive ? 'text-white' : 'text-slate-500 hover:text-slate-300'}`}>
                     {link.name}
                   </Link>
                 );
               }
-
               return (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  ref={(el) => { navRefs.current[link.href.substring(1)] = el; }}
-                  onClick={(e) => scrollToSection(e, link.href)}
-                  className={`relative z-10 px-5 py-2 text-sm font-medium rounded-full transition-colors duration-300 ${
-                    isActive
-                      ? 'text-slate-900'
-                      : 'text-slate-500 hover:text-slate-900'
-                  }`}
-                >
+                <a key={link.name} href={link.href} ref={(el) => { navRefs.current[link.href.substring(1)] = el; }} onClick={(e) => scrollToSection(e, link.href)}
+                  className={`relative z-10 px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-300 ${isActive ? 'text-white' : 'text-slate-500 hover:text-slate-300'}`}>
                   {link.name}
                 </a>
               );
@@ -195,70 +121,60 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
 
           {/* CTA */}
           <div className="hidden md:block shrink-0 ml-auto">
-             <button 
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={handleContactClick}
-              className="inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-white transition-all bg-slate-900 rounded-full hover:bg-slate-800 hover:scale-105 active:scale-95 shadow-lg shadow-slate-900/10"
+              className="px-5 py-2 text-sm font-semibold text-white rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 btn-sweep transition-shadow"
             >
               Get in Touch
-            </button>
+            </motion.button>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button 
-            onClick={() => setIsOpen(!isOpen)} 
-            className="md:hidden p-2 text-slate-800 hover:bg-slate-100 rounded-full transition-colors"
-          >
+          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-full transition-all">
             {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
-      </nav>
+      </motion.nav>
 
-      {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 z-40 bg-white/95 backdrop-blur-xl transition-all duration-300 md:hidden flex items-center justify-center ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-        <div className="text-center space-y-6">
-          {navLinks.map((link) => {
-            const isActive = link.isRoute
-              ? location.pathname === link.href
-              : activeSection === link.href.substring(1);
-
-            if (link.isRoute) {
-              return (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className={`block text-2xl font-medium transition-colors ${
-                    isActive ? 'text-blue-600' : 'text-slate-900 hover:text-blue-600'
-                  }`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              );
-            }
-
-            return (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`block text-2xl font-medium transition-colors ${
-                  isActive ? 'text-blue-600' : 'text-slate-900 hover:text-blue-600'
-                }`}
-                onClick={(e) => scrollToSection(e, link.href)}
-              >
-                {link.name}
-              </a>
-            );
-          })}
-          <div className="pt-8">
-             <button
-                onClick={handleContactClick}
-                className="inline-block px-8 py-3 text-lg font-medium text-white bg-slate-900 rounded-full shadow-lg hover:scale-105 transition-transform"
-              >
-                Let's Talk
-              </button>
-          </div>
-        </div>
-      </div>
+      {/* Mobile Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 bg-surface/95 backdrop-blur-2xl md:hidden flex items-center justify-center"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+              className="text-center space-y-8"
+            >
+              {navLinks.map((link, i) => {
+                const isActive = link.isRoute ? location.pathname === link.href : activeSection === link.href.substring(1);
+                return link.isRoute ? (
+                  <motion.div key={link.name} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.05 }}>
+                    <Link to={link.href} className={`block text-3xl font-display font-bold ${isActive ? 'text-gradient' : 'text-white'}`} onClick={() => setIsOpen(false)}>{link.name}</Link>
+                  </motion.div>
+                ) : (
+                  <motion.div key={link.name} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.05 }}>
+                    <a href={link.href} className={`block text-3xl font-display font-bold ${isActive ? 'text-gradient' : 'text-white'}`} onClick={(e) => scrollToSection(e, link.href)}>{link.name}</a>
+                  </motion.div>
+                );
+              })}
+              <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="pt-10">
+                <button onClick={handleContactClick} className="px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full shadow-xl shadow-indigo-500/30">
+                  Let's Talk
+                </button>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

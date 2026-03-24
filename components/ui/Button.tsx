@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'glass';
@@ -6,21 +7,21 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({ 
-  variant = 'primary', 
-  size = 'md', 
-  className = '', 
-  children, 
-  ...props 
+const Button: React.FC<ButtonProps> = ({
+  variant = 'primary',
+  size = 'md',
+  className = '',
+  children,
+  ...props
 }) => {
-  const baseStyles = "inline-flex items-center justify-center rounded-full font-medium transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden";
-  
+  const baseStyles = "inline-flex items-center justify-center rounded-full font-medium relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed";
+
   const variants = {
-    primary: "bg-slate-900 text-white hover:bg-slate-800 shadow-lg shadow-slate-900/10 hover:shadow-slate-900/20 ring-1 ring-slate-900",
-    secondary: "bg-white text-slate-900 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 shadow-sm hover:shadow-md",
-    outline: "border border-slate-900/10 text-slate-900 hover:bg-slate-50",
-    ghost: "text-slate-600 hover:text-slate-900 hover:bg-slate-100/50",
-    glass: "bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 shadow-lg"
+    primary: "bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/20 btn-sweep",
+    secondary: "bg-white/5 text-white border border-white/10 backdrop-blur-sm",
+    outline: "border border-white/10 text-slate-300",
+    ghost: "text-slate-400",
+    glass: "glass text-white shadow-lg"
   };
 
   const sizes = {
@@ -30,16 +31,15 @@ const Button: React.FC<ButtonProps> = ({
   };
 
   return (
-    <button 
+    <motion.button
+      whileHover={{ scale: 1.05, y: -1 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 400, damping: 15 }}
       className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className} group`}
       {...props}
     >
-      {/* Shimmer effect for primary button */}
-      {variant === 'primary' && (
-        <span className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/10 to-transparent z-10" />
-      )}
-      <span className="relative z-20 flex items-center">{children}</span>
-    </button>
+      <span className="relative z-20 flex items-center gap-2">{children}</span>
+    </motion.button>
   );
 };
 
