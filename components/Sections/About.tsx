@@ -15,7 +15,7 @@ const About: React.FC = () => {
                   Blending Technology, <br/>Creativity & Purpose.
                 </p>
                 <p className="text-lg text-slate-500 max-w-xl">
-                    We are a multidisciplinary digital studio committed to building intuitive apps and products that make life simpler, deeper, and more meaningful.
+                    We are a multidisciplinary product studio that designs and engineers platforms across faith, healthcare, and sports — each built to simplify complexity and deliver real value.
                 </p>
             </div>
 
@@ -27,7 +27,7 @@ const About: React.FC = () => {
                 <div>
                     <h3 className="text-xl font-bold mb-3">Our Vision</h3>
                     <p className="text-slate-300 text-sm leading-relaxed">
-                        To shape the future of digital experiences by creating platforms that inspire personal growth and foster connection.
+                        To shape the future of digital experiences by creating platforms that inspire growth, improve outcomes, and foster connection across industries.
                     </p>
                 </div>
             </div>
@@ -53,7 +53,7 @@ const About: React.FC = () => {
                 <div>
                     <h3 className="text-2xl font-bold text-slate-900 mb-3">Heart for Impact</h3>
                     <p className="text-slate-600 leading-relaxed max-w-lg">
-                        At the heart of our work is a belief: Digital tools should help people live better, think deeper, and connect stronger. Every product we build aims to inspire the soul.
+                        At the heart of our work is a belief: Digital tools should help people live better, think deeper, and connect stronger. Every product we build — from spiritual companions to clinical platforms to sports analytics — is crafted with purpose.
                     </p>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Zap, Globe, Smartphone, Feather, Layout, Brain, ArrowUpRight } from 'lucide-react';
+import { Zap, Globe, Smartphone, Feather, Layout, Brain, ArrowUpRight, Trophy } from 'lucide-react';
 
 const Mission: React.FC = () => {
   const products = [
@@ -7,6 +7,7 @@ const Mission: React.FC = () => {
     { name: "Web Platforms", icon: <Layout className="w-5 h-5"/>, color: "text-purple-600 bg-purple-50" },
     { name: "Spiritual Tools", icon: <Feather className="w-5 h-5"/>, color: "text-green-600 bg-green-50" },
     { name: "AI Learning", icon: <Brain className="w-5 h-5"/>, color: "text-orange-600 bg-orange-50" },
+    { name: "Sports Analytics", icon: <Trophy className="w-5 h-5"/>, color: "text-lime-600 bg-lime-50" },
     { name: "Community", icon: <Globe className="w-5 h-5"/>, color: "text-pink-600 bg-pink-50" },
   ];
 

@@ -135,7 +135,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenContact }) => {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
             </span>
             <span className="text-[11px] font-bold tracking-widest uppercase text-slate-500">
-              Reimagining Digital Faith
+              Kaspar Works Inc.
             </span>
           </div>
         </div>
@@ -146,22 +146,20 @@ const Hero: React.FC<HeroProps> = ({ onOpenContact }) => {
             {/* Main Text with Staggered Word Animation */}
             <div className="text-center space-x-3 sm:space-x-4">
               <span className="inline-block opacity-0 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
-                <span className="text-slate-950">Design</span>
+                <span className="text-slate-950">We</span>
               </span>
               <span className="inline-block opacity-0 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
-                <span className="text-slate-950">that</span>
+                <span className="text-slate-950">build</span>
               </span>
               <span className="inline-block opacity-0 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
-                <span className="relative">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 animate-shimmer-slow bg-[length:200%_auto]">Moves</span>
-                </span>
+                <span className="text-slate-950">software</span>
               </span>
               <span className="inline-block opacity-0 animate-fade-in-up" style={{ animationDelay: '800ms' }}>
-                <span className="text-slate-950">the</span>
+                <span className="text-slate-950">that</span>
               </span>
               <span className="inline-block opacity-0 animate-fade-in-up" style={{ animationDelay: '1000ms' }}>
                 <span className="relative">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 animate-shimmer-slow bg-[length:200%_auto]">Soul</span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">matters</span>
                   {/* Underline accent */}
                   <span className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-0 animate-fade-in-up" style={{ animationDelay: '1200ms' }}></span>
                 </span>
@@ -179,27 +177,13 @@ const Hero: React.FC<HeroProps> = ({ onOpenContact }) => {
         <div className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal mb-10 space-y-1">
            <div className="overflow-hidden">
              <p className="animate-slide-up-fade opacity-0" style={{ animationDelay: '500ms' }}>
-                Kaspar Works builds meaningful platforms that help people{' '}
-                <span className="inline-block relative group">
-                  <span className="font-medium text-slate-900 relative z-10">grow</span>
-                  <span className="absolute bottom-1 left-0 w-full h-[6px] bg-yellow-100 -z-0 scale-x-0 animate-expand-width origin-left" style={{ animationDelay: '1000ms' }}></span>
-                </span>
-                ,{' '}
-                <span className="inline-block relative group">
-                  <span className="font-medium text-slate-900 relative z-10">reflect</span>
-                  <span className="absolute bottom-1 left-0 w-full h-[6px] bg-blue-100 -z-0 scale-x-0 animate-expand-width origin-left" style={{ animationDelay: '1200ms' }}></span>
-                </span>
-                , and{' '}
-                <span className="inline-block relative group">
-                  <span className="font-medium text-slate-900 relative z-10">connect</span>
-                  <span className="absolute bottom-1 left-0 w-full h-[6px] bg-pink-100 -z-0 scale-x-0 animate-expand-width origin-left" style={{ animationDelay: '1400ms' }}></span>
-                </span>
-                .
+                Creating meaningful platforms for{' '}
+                <span className="font-medium text-slate-900">health, faith, and sports</span> — designed to make a real difference.
              </p>
            </div>
            <div className="overflow-hidden">
              <p className="animate-slide-up-fade opacity-0 font-medium text-slate-800" style={{ animationDelay: '650ms' }}>
-               Technology with a heart for impact.
+               Simple tools. Real impact.
              </p>
            </div>
         </div>
@@ -210,7 +194,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenContact }) => {
           style={{ animationDelay: '800ms' }}
         >
             {/* Inline Natural Language Form */}
-            <div className="w-full bg-white/60 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 border border-white/50 shadow-xl shadow-slate-200/50 ring-1 ring-white">
+            <div className="w-full bg-slate-900 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 border border-slate-700/50 shadow-2xl shadow-slate-900/40 ring-1 ring-slate-800">
                 <NaturalForm />
             </div>
         </div>

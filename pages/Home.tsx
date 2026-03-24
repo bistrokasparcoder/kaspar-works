@@ -3,6 +3,7 @@ import Hero from '../components/Sections/Hero';
 import About from '../components/Sections/About';
 import Flagship from '../components/Sections/Flagship';
 import Dialysis from '../components/Sections/Dialysis';
+import CricketBolt from '../components/Sections/CricketBolt';
 import Mission from '../components/Sections/Mission';
 
 interface HomeProps {
@@ -16,6 +17,7 @@ const Home: React.FC<HomeProps> = ({ onOpenContact }) => {
       <About />
       <Flagship />
       <Dialysis />
+      <CricketBolt />
       <Mission />
     </>
   );
