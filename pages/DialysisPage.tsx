@@ -1,7 +1,8 @@
 import React from 'react';
 import { Activity, Heart, Shield, Sparkles, Droplet, TrendingUp, Globe, Smartphone, MonitorSmartphone, ExternalLink, ArrowRight, Lock, Brain } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { FadeUp, BlurIn, Stagger, StaggerItem, GlowCard, FloatingElement } from '../components/motion';
+import { FadeUp, BlurIn, Stagger, StaggerItem, FloatingElement } from '../components/motion';
+import TiltCard from '../components/ui/TiltCard';
 
 const ease = [0.16, 1, 0.3, 1];
 
@@ -133,15 +134,14 @@ const DialysisPage: React.FC = () => {
           <Stagger className="grid md:grid-cols-2 gap-6" staggerDelay={0.1}>
             {features.map((f, i) => (
               <StaggerItem key={i}>
-                <GlowCard
-                  className={`group p-8 md:p-10 rounded-[1.5rem] bg-gradient-to-br ${f.bg} border hover:border-white/10 transition-all h-full`}
-                  hoverY={-6}
-                  hoverScale={1.01}
+                <TiltCard
+                  className={`group p-6 sm:p-8 md:p-10 rounded-[1.25rem] sm:rounded-[1.5rem] border border-[var(--glass-border)] bg-surface-50 hover:border-[var(--glass-border-strong)] transition-all h-full`}
+                  intensity={10}
                 >
-                  <div className={`${f.color} mb-5 group-hover:scale-110 transition-transform origin-left`}>{f.icon}</div>
-                  <h3 className="text-2xl font-display font-bold text-white mb-3 tracking-tight">{f.title}</h3>
-                  <p className="text-slate-400 leading-relaxed text-base">{f.desc}</p>
-                </GlowCard>
+                  <div className={`${f.color} mb-5 group-hover:scale-110 transition-transform origin-left`} style={{ transform: 'translateZ(25px)' }}>{f.icon}</div>
+                  <h3 className="text-xl sm:text-2xl font-display font-bold text-[var(--text-primary)] mb-3 tracking-tight" style={{ transform: 'translateZ(15px)' }}>{f.title}</h3>
+                  <p className="text-[var(--text-secondary)] leading-relaxed text-sm sm:text-base" style={{ transform: 'translateZ(8px)' }}>{f.desc}</p>
+                </TiltCard>
               </StaggerItem>
             ))}
           </Stagger>
