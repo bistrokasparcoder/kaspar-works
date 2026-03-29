@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavbarProps {
   onOpenContact?: () => void;
+  theme?: 'dark' | 'light';
+  onToggleTheme?: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
+const Navbar: React.FC<NavbarProps> = ({ onOpenContact, theme = 'dark', onToggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -52,6 +54,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
 
   const navLinks = [
     { name: 'About', href: '#about', isRoute: false },
+    { name: 'Products', href: '#products', isRoute: false },
     { name: 'Apps', href: '/apps', isRoute: true },
     { name: 'Mission', href: '#mission', isRoute: false },
   ];
@@ -80,16 +83,16 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
         <div className={`
           relative px-5 py-2.5 rounded-full transition-all duration-500 flex items-center justify-between md:justify-start gap-6
           ${scrolled
-            ? 'bg-surface-50/80 backdrop-blur-2xl border border-white/[0.08] shadow-2xl shadow-black/40'
-            : 'bg-surface-50/40 backdrop-blur-xl border border-white/[0.04]'
+            ? 'bg-surface-50/80 backdrop-blur-2xl border border-[var(--glass-border-strong)] shadow-2xl shadow-black/20'
+            : 'bg-surface-50/40 backdrop-blur-xl border border-[var(--glass-border)]'
           }
         `}>
           <Link
             to="/"
             onClick={() => { if (location.pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="font-display text-lg font-bold tracking-tight text-white shrink-0"
+            className="font-display text-lg font-bold tracking-tight text-[var(--text-primary)] shrink-0"
           >
-            Kaspar<span className="text-slate-500">Works</span>
+            Kaspar<span className="text-[var(--text-muted)]">Works</span>
           </Link>
 
           {/* Desktop Links */}
@@ -105,33 +108,52 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
               if (link.isRoute) {
                 return (
                   <Link key={link.name} to={link.href} ref={(el) => { navRefs.current[link.href] = el; }} onClick={() => setIsOpen(false)}
-                    className={`relative z-10 px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-300 ${isActive ? 'text-white' : 'text-slate-500 hover:text-slate-300'}`}>
+                    className={`relative z-10 px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-300 ${isActive ? 'text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}>
                     {link.name}
                   </Link>
                 );
               }
               return (
                 <a key={link.name} href={link.href} ref={(el) => { navRefs.current[link.href.substring(1)] = el; }} onClick={(e) => scrollToSection(e, link.href)}
-                  className={`relative z-10 px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-300 ${isActive ? 'text-white' : 'text-slate-500 hover:text-slate-300'}`}>
+                  className={`relative z-10 px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-300 ${isActive ? 'text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}>
                   {link.name}
                 </a>
               );
             })}
           </div>
 
-          {/* CTA */}
-          <div className="hidden md:block shrink-0 ml-auto">
+          {/* CTA + Theme Toggle */}
+          <div className="hidden md:flex items-center gap-2 shrink-0 ml-auto">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={onToggleTheme}
+              className="p-2 rounded-full text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/[0.08] transition-colors"
+              aria-label="Toggle theme"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {theme === 'dark' ? (
+                  <motion.div key="sun" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                    <Sun size={18} />
+                  </motion.div>
+                ) : (
+                  <motion.div key="moon" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                    <Moon size={18} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleContactClick}
-              className="px-5 py-2 text-sm font-semibold text-white rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 btn-sweep transition-shadow"
+              className="px-5 py-2 text-sm font-bold rounded-full bg-[var(--accent)] text-[var(--bg-base)] hover:opacity-90 transition-opacity"
             >
               Get in Touch
             </motion.button>
           </div>
 
-          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-full transition-all">
+          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/5 rounded-full transition-all">
             {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
@@ -145,7 +167,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-surface/95 backdrop-blur-2xl md:hidden flex items-center justify-center"
+            className="fixed inset-0 z-40 bg-surface/[0.97] backdrop-blur-2xl md:hidden flex items-center justify-center"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -158,17 +180,21 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
                 const isActive = link.isRoute ? location.pathname === link.href : activeSection === link.href.substring(1);
                 return link.isRoute ? (
                   <motion.div key={link.name} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.05 }}>
-                    <Link to={link.href} className={`block text-3xl font-display font-bold ${isActive ? 'text-gradient' : 'text-white'}`} onClick={() => setIsOpen(false)}>{link.name}</Link>
+                    <Link to={link.href} className={`block text-3xl font-display font-bold ${isActive ? 'text-gradient' : 'text-[var(--text-primary)]'}`} onClick={() => setIsOpen(false)}>{link.name}</Link>
                   </motion.div>
                 ) : (
                   <motion.div key={link.name} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.05 }}>
-                    <a href={link.href} className={`block text-3xl font-display font-bold ${isActive ? 'text-gradient' : 'text-white'}`} onClick={(e) => scrollToSection(e, link.href)}>{link.name}</a>
+                    <a href={link.href} className={`block text-3xl font-display font-bold ${isActive ? 'text-gradient' : 'text-[var(--text-primary)]'}`} onClick={(e) => scrollToSection(e, link.href)}>{link.name}</a>
                   </motion.div>
                 );
               })}
-              <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="pt-10">
-                <button onClick={handleContactClick} className="px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full shadow-xl shadow-indigo-500/30">
+              <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="pt-10 flex flex-col items-center gap-6">
+                <button onClick={handleContactClick} className="px-8 py-3 text-lg font-bold text-[#0c0c0e] bg-[var(--accent)] rounded-full">
                   Let's Talk
+                </button>
+                <button onClick={onToggleTheme} className="flex items-center gap-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">
+                  {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                  <span className="text-sm">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
                 </button>
               </motion.div>
             </motion.div>

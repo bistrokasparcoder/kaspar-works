@@ -1,10 +1,9 @@
 import React from 'react';
 import Hero from '../components/Sections/Hero';
 import About from '../components/Sections/About';
-import Flagship from '../components/Sections/Flagship';
-import Dialysis from '../components/Sections/Dialysis';
-import CricketBolt from '../components/Sections/CricketBolt';
+import Products from '../components/Sections/Products';
 import Mission from '../components/Sections/Mission';
+import ScrollMarquee from '../components/ScrollMarquee';
 
 interface HomeProps {
   onOpenContact: () => void;
@@ -15,9 +14,8 @@ const Home: React.FC<HomeProps> = ({ onOpenContact }) => {
     <>
       <Hero onOpenContact={onOpenContact} />
       <About />
-      <Flagship />
-      <Dialysis />
-      <CricketBolt />
+      <ScrollMarquee />
+      <Products />
       <Mission />
     </>
   );

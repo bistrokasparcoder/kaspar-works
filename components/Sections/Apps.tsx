@@ -1,5 +1,5 @@
 import React from 'react';
-import { Smartphone, Globe, MonitorSmartphone, Activity, Heart, FileText, BookOpen, Users, MessageCircle, Sparkles, ExternalLink, ArrowRight, Download, Zap, BarChart3, Trophy, Radio, Target, TrendingUp } from 'lucide-react';
+import { Smartphone, Globe, MonitorSmartphone, Activity, Heart, FileText, BookOpen, Users, MessageCircle, Sparkles, ExternalLink, ArrowRight, Download } from 'lucide-react';
 
 const Apps: React.FC = () => {
   return (
@@ -26,14 +26,14 @@ const Apps: React.FC = () => {
             </h1>
 
             <p className="text-xl sm:text-2xl text-slate-400 leading-relaxed">
-              Purpose-driven products across faith, healthcare, and sports — each engineered to deliver real impact
+              Purpose-driven products across faith and healthcare — each engineered to deliver real impact
             </p>
 
             <div className="flex flex-wrap justify-center gap-8 pt-8">
               {[
-                { value: '3', label: 'Applications' },
+                { value: '2', label: 'Applications' },
                 { value: '4', label: 'Platforms' },
-                { value: '3', label: 'Industries' },
+                { value: '2', label: 'Industries' },
               ].map((stat, i) => (
                 <React.Fragment key={i}>
                   {i > 0 && <div className="w-px bg-white/[0.06]" />}
@@ -223,150 +223,6 @@ const Apps: React.FC = () => {
         </div>
       </section>
 
-      {/* CricketBolt */}
-      <section className="relative overflow-hidden py-32">
-        <div className="absolute inset-0 bg-gradient-to-br from-surface via-[#0a1a0a]/[0.08] to-surface" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-lime-500/[0.04] via-green-500/[0.04] to-emerald-500/[0.04] blur-[150px] rounded-full" />
-
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8 lg:order-1 sr">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-lime-500/[0.08] border border-lime-500/15 backdrop-blur-sm">
-                <div className="flex h-2 w-2 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-lime-500" />
-                </div>
-                <span className="text-xs font-bold text-lime-300 tracking-wider uppercase">Live Now</span>
-              </div>
-
-              <div>
-                <h2 className="text-5xl sm:text-6xl lg:text-7xl font-display font-extrabold tracking-tight text-white leading-[1.05] mb-4">
-                  Cricket<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-green-400">Bolt</span>
-                </h2>
-                <p className="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-green-300 font-semibold">Feel Every Ball</p>
-              </div>
-
-              <p className="text-lg text-slate-400 leading-relaxed max-w-xl">
-                The world's most advanced cricket analytics platform. AI-powered momentum analysis,
-                ball-by-ball predictions, and real-time match intelligence for the passionate fan.
-              </p>
-
-              <div className="flex flex-wrap gap-3">
-                <div className="px-4 py-2 rounded-xl glass flex items-center gap-2">
-                  <Globe className="text-lime-400" size={18} />
-                  <span className="text-sm font-semibold text-white">Web</span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { icon: <BarChart3 size={24} />, title: 'AI Analytics', desc: 'Momentum detection', color: 'text-lime-400' },
-                  { icon: <Target size={24} />, title: 'Live Predictions', desc: 'Ball-by-ball accuracy', color: 'text-green-400' },
-                  { icon: <Radio size={24} />, title: 'Real-Time Scores', desc: 'Instant updates', color: 'text-emerald-400' },
-                  { icon: <Trophy size={24} />, title: 'Leaderboards', desc: 'Compete globally', color: 'text-yellow-400' },
-                ].map((f, i) => (
-                  <div key={i} className="group p-5 rounded-[1.25rem] glass hover:bg-lime-500/[0.04] hover:border-lime-500/15 transition-all duration-300">
-                    <div className={`${f.color} mb-3`}>{f.icon}</div>
-                    <h4 className="text-white font-semibold mb-1">{f.title}</h4>
-                    <p className="text-sm text-slate-500">{f.desc}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="pt-4">
-                <button
-                  onClick={() => window.open('https://cricketbolt.com/', '_blank')}
-                  className="group px-8 py-4 rounded-full bg-gradient-to-r from-lime-500 to-green-500 text-black font-bold shadow-2xl shadow-lime-500/20 hover:shadow-lime-500/40 hover:scale-105 transition-all duration-300 flex items-center gap-3 btn-sweep"
-                >
-                  <Zap size={20} />
-                  <span>Visit CricketBolt</span>
-                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
-            </div>
-
-            <div className="relative lg:order-2 sr sr-delay-3">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-gradient-to-r from-lime-500/[0.1] to-green-500/[0.1] blur-[100px] rounded-full animate-glow-pulse" />
-              <div className="relative z-10 max-w-[480px] mx-auto transform hover:scale-[1.02] transition-transform duration-700">
-                <div className="glass-strong rounded-[1.25rem] shadow-2xl shadow-lime-500/10 overflow-hidden ring-1 ring-lime-500/10">
-                  <div className="bg-white/[0.03] px-4 py-3 flex items-center gap-2 border-b border-white/[0.04]">
-                    <div className="flex gap-2">
-                      <div className="w-3 h-3 rounded-full bg-white/10" />
-                      <div className="w-3 h-3 rounded-full bg-white/10" />
-                      <div className="w-3 h-3 rounded-full bg-white/10" />
-                    </div>
-                    <div className="flex-1 ml-4 bg-white/[0.03] rounded-lg px-3 py-1 text-xs text-slate-500 flex items-center gap-2">
-                      <Zap size={12} className="text-lime-400" />
-                      <span>cricketbolt.com</span>
-                    </div>
-                  </div>
-                  <div className="relative bg-surface h-[340px] overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-lime-950/20 via-surface to-green-950/10">
-                      <div className="p-5 space-y-3">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <Zap className="text-lime-400" size={18} />
-                            <span className="text-white font-display font-bold">CricketBolt</span>
-                          </div>
-                          <div className="px-3 py-1 rounded-full bg-lime-500/15 border border-lime-500/20 text-lime-300 text-xs font-semibold">LIVE</div>
-                        </div>
-                        <div className="glass rounded-[1rem] p-4">
-                          <div className="flex justify-between items-center mb-2">
-                            <span className="text-slate-500 text-xs uppercase tracking-wide">T20 International</span>
-                            <span className="text-lime-400 text-xs font-bold flex items-center gap-1"><Radio size={10} /> Live</span>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <div className="text-center">
-                              <div className="text-white font-bold text-sm">IND</div>
-                              <div className="text-lime-300 font-display font-bold text-lg">186/4</div>
-                            </div>
-                            <div className="text-slate-700 text-xs font-bold">VS</div>
-                            <div className="text-center">
-                              <div className="text-white font-bold text-sm">AUS</div>
-                              <div className="text-slate-400 font-display font-bold text-lg">142/6</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="glass rounded-[1rem] p-3">
-                          <div className="flex items-center gap-2 mb-2">
-                            <BarChart3 className="text-lime-400" size={14} />
-                            <span className="text-white text-xs font-semibold">AI Win Probability</span>
-                          </div>
-                          <div className="h-2 w-full bg-white/[0.04] rounded-full overflow-hidden">
-                            <div className="h-full w-[78%] bg-gradient-to-r from-lime-500 to-green-400 rounded-full" />
-                          </div>
-                          <div className="flex justify-between mt-1">
-                            <span className="text-lime-300 text-xs font-bold">IND 78%</span>
-                            <span className="text-slate-600 text-xs">AUS 22%</span>
-                          </div>
-                        </div>
-                        <div className="glass rounded-[1rem] p-3">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Trophy className="text-yellow-400" size={14} />
-                            <span className="text-white text-xs font-semibold">Top Predictors</span>
-                          </div>
-                          <div className="space-y-1">
-                            {['CricketGuru', 'BoltMaster', 'AnalyticsPro'].map((name, i) => (
-                              <div key={i} className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                  <span className="text-lime-400 text-xs font-bold w-4">{i + 1}</span>
-                                  <span className="text-slate-400 text-xs">{name}</span>
-                                </div>
-                                <span className="text-lime-300 text-xs font-semibold">{[2840, 2650, 2510][i]} XP</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Bottom CTA */}
       <section className="relative overflow-hidden py-32">
         <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface-50 to-surface" />
@@ -376,7 +232,7 @@ const Apps: React.FC = () => {
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-white">
             Explore Our Products
           </h2>
-          <p className="text-xl text-slate-500">Join thousands of users across faith, health, and sports</p>
+          <p className="text-xl text-slate-500">Join thousands of users across faith and health</p>
           <div className="flex flex-wrap justify-center gap-4 pt-6">
             <button
               onClick={() => window.open('https://apps.apple.com/us/app/inspired-by-the-cross/id6742165428', '_blank')}
@@ -391,13 +247,6 @@ const Apps: React.FC = () => {
             >
               <span>dialysis.live</span>
               <ExternalLink size={20} />
-            </button>
-            <button
-              onClick={() => window.open('https://cricketbolt.com/', '_blank')}
-              className="px-8 py-4 rounded-full bg-lime-500/[0.08] border border-lime-500/15 text-lime-300 font-bold hover:bg-lime-500/[0.15] transition-all duration-300 flex items-center gap-2 hover:scale-105"
-            >
-              <Zap size={20} />
-              <span>CricketBolt</span>
             </button>
           </div>
         </div>
