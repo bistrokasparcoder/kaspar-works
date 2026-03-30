@@ -267,7 +267,7 @@ function OrbitalPaths() {
   const accent = useAccent();
   return (
     <>
-      {[2.2, 3, 3.8].map((r, i) => (
+      {[1.8, 2.4, 3].map((r, i) => (
         <mesh key={i} rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.3, 0]}>
           <torusGeometry args={[r, 0.004, 16, 100]} />
           <meshBasicMaterial color={accent} transparent opacity={0.15 + i * 0.03} />
@@ -285,19 +285,19 @@ function OrbitingAgents() {
 
   const agents = useMemo(() => [
     // Ring 1 — inner (fast, intimate)
-    { type: 'robotA', radius: 2.2, speed: 0.18, offset: 0, color: isLight ? '#3347cc' : '#88aa22' },
-    { type: 'human', radius: 2.2, speed: 0.18, offset: Math.PI * 0.67, color: isLight ? '#444' : '#aaa' },
-    { type: 'robotC', radius: 2.2, speed: 0.18, offset: Math.PI * 1.33, color: isLight ? '#2255bb' : '#aadd00' },
+    { type: 'robotA', radius: 1.8, speed: 0.18, offset: 0, color: isLight ? '#3347cc' : '#88aa22' },
+    { type: 'human', radius: 1.8, speed: 0.18, offset: Math.PI * 0.67, color: isLight ? '#444' : '#aaa' },
+    { type: 'robotC', radius: 1.8, speed: 0.18, offset: Math.PI * 1.33, color: isLight ? '#2255bb' : '#aadd00' },
     // Ring 2 — middle (counter-rotate)
-    { type: 'human', radius: 3, speed: -0.12, offset: 0.3, color: isLight ? '#555' : '#999' },
-    { type: 'robotB', radius: 3, speed: -0.12, offset: Math.PI * 0.6 + 0.3, color: isLight ? '#2255bb' : '#99cc11' },
-    { type: 'human', radius: 3, speed: -0.12, offset: Math.PI * 1.2 + 0.3, color: isLight ? '#666' : '#bbb' },
-    { type: 'robotA', radius: 3, speed: -0.12, offset: Math.PI * 1.8 + 0.3, color: isLight ? '#4455dd' : '#77bb11' },
+    { type: 'human', radius: 2.4, speed: -0.12, offset: 0.3, color: isLight ? '#555' : '#999' },
+    { type: 'robotB', radius: 2.4, speed: -0.12, offset: Math.PI * 0.6 + 0.3, color: isLight ? '#2255bb' : '#99cc11' },
+    { type: 'human', radius: 2.4, speed: -0.12, offset: Math.PI * 1.2 + 0.3, color: isLight ? '#666' : '#bbb' },
+    { type: 'robotA', radius: 2.4, speed: -0.12, offset: Math.PI * 1.8 + 0.3, color: isLight ? '#4455dd' : '#77bb11' },
     // Ring 3 — outer (slow, wide)
-    { type: 'robotC', radius: 3.8, speed: 0.07, offset: 0.8, color: isLight ? '#4455dd' : '#77bb11' },
-    { type: 'human', radius: 3.8, speed: 0.07, offset: Math.PI * 0.5 + 0.8, color: isLight ? '#444' : '#ccc' },
-    { type: 'robotB', radius: 3.8, speed: 0.07, offset: Math.PI + 0.8, color: isLight ? '#3344cc' : '#aadd00' },
-    { type: 'human', radius: 3.8, speed: 0.07, offset: Math.PI * 1.5 + 0.8, color: isLight ? '#555' : '#ddd' },
+    { type: 'robotC', radius: 3, speed: 0.07, offset: 0.8, color: isLight ? '#4455dd' : '#77bb11' },
+    { type: 'human', radius: 3, speed: 0.07, offset: Math.PI * 0.5 + 0.8, color: isLight ? '#444' : '#ccc' },
+    { type: 'robotB', radius: 3, speed: 0.07, offset: Math.PI + 0.8, color: isLight ? '#3344cc' : '#aadd00' },
+    { type: 'human', radius: 3, speed: 0.07, offset: Math.PI * 1.5 + 0.8, color: isLight ? '#555' : '#ddd' },
   ], [isLight]);
 
   useFrame(({ clock }) => {
@@ -386,8 +386,8 @@ function DataNodes() {
 function Camera() {
   const { camera } = useThree();
   useFrame(({ pointer }) => {
-    camera.position.x = THREE.MathUtils.lerp(camera.position.x, pointer.x * 1.2, 0.015);
-    camera.position.y = THREE.MathUtils.lerp(camera.position.y, pointer.y * 0.4 + 3, 0.015);
+    camera.position.x = THREE.MathUtils.lerp(camera.position.x, pointer.x * 1, 0.015);
+    camera.position.y = THREE.MathUtils.lerp(camera.position.y, pointer.y * 0.3 + 2.5, 0.015);
     camera.lookAt(0, 0, 0);
   });
   return null;
@@ -400,7 +400,7 @@ const Scene3D: React.FC<{ className?: string }> = ({ className = '' }) => {
   return (
     <div className={className}>
       <Canvas
-        camera={{ position: [0, 3, 7.5], fov: 40 }}
+        camera={{ position: [0, 2.5, 6], fov: 42 }}
         dpr={[1, 1.5]}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         style={{ background: 'transparent' }}

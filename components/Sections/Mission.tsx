@@ -7,7 +7,7 @@ const Mission: React.FC = () => {
   const capabilities = [
     { name: "Mobile Apps", icon: <Smartphone className="w-5 h-5" /> },
     { name: "Web Platforms", icon: <Layout className="w-5 h-5" /> },
-    { name: "Spiritual Tools", icon: <Feather className="w-5 h-5" /> },
+    { name: "Faith Tech", icon: <Feather className="w-5 h-5" /> },
     { name: "AI Solutions", icon: <Brain className="w-5 h-5" /> },
     { name: "Community", icon: <Globe className="w-5 h-5" /> },
   ];

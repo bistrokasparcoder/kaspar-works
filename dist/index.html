@@ -5,26 +5,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary Meta Tags -->
-    <title>Kaspar Works Inc - Design that Moves the Soul</title>
-    <meta name="title" content="Kaspar Works Inc - Design that Moves the Soul" />
-    <meta name="description" content="Kaspar Works builds purpose-driven digital platforms across faith, healthcare, and sports. Creators of Inspired By The Cross, dialysis.live, and CricketBolt." />
-    <meta name="keywords" content="digital studio, mobile development, web platforms, Inspired By The Cross, dialysis.live, CricketBolt, cricket analytics, faith technology, health tech, sports tech" />
+    <title>Kaspar Works Inc — We Build Software That Matters</title>
+    <meta name="title" content="Kaspar Works Inc — We Build Software That Matters" />
+    <meta name="description" content="Kaspar Works builds purpose-driven digital platforms across faith and healthcare. Creators of Inspired By The Cross and dialysis.live." />
+    <meta name="keywords" content="digital studio, mobile development, web platforms, Inspired By The Cross, dialysis.live, faith technology, health tech" />
     <meta name="author" content="Kaspar Works Inc" />
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://kaspar.works/" />
-    <meta property="og:title" content="Kaspar Works Inc - Design that Moves the Soul" />
-    <meta property="og:description" content="Purpose-driven digital platforms across faith, healthcare, and sports — designed to inspire, heal, and connect." />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:title" content="Kaspar Works Inc — We Build Software That Matters" />
+    <meta property="og:description" content="A software development company building purpose-driven digital platforms. Creators of Inspired By The Cross and dialysis.live." />
+    <meta property="og:image" content="https://kaspar.works/og-image.png" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://kaspar.works/" />
-    <meta property="twitter:title" content="Kaspar Works Inc - Design that Moves the Soul" />
-    <meta property="twitter:description" content="Purpose-driven digital platforms across faith, healthcare, and sports — designed to inspire, heal, and connect." />
-    <meta property="twitter:image" content="/og-image.png" />
+    <meta property="twitter:title" content="Kaspar Works Inc - Software Development Company" />
+    <meta property="twitter:description" content="A software development company building purpose-driven digital platforms. Creators of Inspired By The Cross and dialysis.live." />
+    <meta property="twitter:image" content="https://kaspar.works/og-image.png" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://kaspar.works/" />
+
+    <!-- Preload fonts for performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700;800&display=swap" as="style" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Kaspar Works Inc",
+      "url": "https://kaspar.works",
+      "logo": "https://kaspar.works/favicon.ico",
+      "description": "A software development company building purpose-driven digital platforms across faith and healthcare.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "131 Continental Dr, Suite 305",
+        "addressLocality": "Newark",
+        "addressRegion": "DE",
+        "postalCode": "19713",
+        "addressCountry": "US"
+      },
+      "email": "kaspar@kaspar.works",
+      "sameAs": [],
+      "knowsAbout": ["Mobile App Development", "Web Development", "Faith Technology", "Health Technology", "AI Solutions"]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Kaspar Works Inc",
+      "url": "https://kaspar.works",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://kaspar.works/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Inspired By The Cross",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "iOS",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "A digital sanctuary designed to deepen your spiritual journey with daily devotionals, community prayer, and scripture.",
+        "url": "https://apps.apple.com/us/app/inspired-by-the-cross/id6742165428"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "dialysis.live",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web, iOS, Android",
+        "description": "Track dialysis treatments, vitals, nutrition, and medications in one clinical-grade platform with AI-powered insights.",
+        "url": "https://dialysis.live"
+      }
+    ]
+    </script>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -33,10 +102,10 @@
     <!-- Theme Color -->
     <meta name="theme-color" content="#050508" />
 
-    <!-- Fonts: Sora (display) + Inter (body) -->
+    <!-- Fonts: Sora (display) + Inter (body) + Playfair Display (editorial accent) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -47,14 +116,15 @@
             fontFamily: {
               sans: ['Inter', 'system-ui', 'sans-serif'],
               display: ['Sora', 'Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'Georgia', 'serif'],
             },
             colors: {
               surface: {
-                DEFAULT: '#050508',
-                50: '#0a0d14',
-                100: '#0f1219',
-                200: '#141821',
-                300: '#1a1f2e',
+                DEFAULT: 'var(--bg-base)',
+                50: 'var(--bg-50)',
+                100: 'var(--bg-100)',
+                200: 'var(--bg-200)',
+                300: 'var(--bg-300)',
               },
             },
             animation: {
@@ -119,16 +189,69 @@
       }
     </script>
     <style>
+      /* ========== THEME VARIABLES ========== */
+      /* Warm dark palette — no cold blue-blacks */
+      :root {
+        --bg-base: #0c0c0e;
+        --bg-50: #111114;
+        --bg-100: #17171b;
+        --bg-200: #1e1e23;
+        --bg-300: #27272e;
+        --text-primary: #ece8e1;
+        --text-secondary: #9a9590;
+        --text-muted: #5c5955;
+        --accent: #c8ff00;
+        --accent-soft: rgba(200, 255, 0, 0.12);
+        --glass-bg: rgba(255, 255, 255, 0.03);
+        --glass-bg-strong: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.06);
+        --glass-border-strong: rgba(255, 255, 255, 0.1);
+        --grid-line: rgba(255, 255, 255, 0.02);
+        --scrollbar-track: #0c0c0e;
+        --scrollbar-thumb: rgba(255, 255, 255, 0.08);
+        --scrollbar-thumb-hover: rgba(255, 255, 255, 0.15);
+        --selection-bg: rgba(200, 255, 0, 0.25);
+        --card-hover-bg: rgba(255, 255, 255, 0.04);
+        --noise-opacity: 0.025;
+        --input-focus-shadow: 0 0 0 2px rgba(200, 255, 0, 0.2), 0 0 20px rgba(200, 255, 0, 0.05);
+      }
+
+      html.light {
+        --bg-base: #f5f2ed;
+        --bg-50: #ece8e1;
+        --bg-100: #e2ddd5;
+        --bg-200: #d6d0c7;
+        --bg-300: #c5bfb5;
+        --text-primary: #1a1a1e;
+        --text-secondary: #4a4843;
+        --text-muted: #8a8680;
+        --accent: #0038ff;
+        --accent-soft: rgba(0, 56, 255, 0.1);
+        --glass-bg: rgba(255, 255, 255, 0.5);
+        --glass-bg-strong: rgba(255, 255, 255, 0.7);
+        --glass-border: rgba(0, 0, 0, 0.06);
+        --glass-border-strong: rgba(0, 0, 0, 0.1);
+        --grid-line: rgba(0, 0, 0, 0.04);
+        --scrollbar-track: #f5f2ed;
+        --scrollbar-thumb: rgba(0, 0, 0, 0.1);
+        --scrollbar-thumb-hover: rgba(0, 0, 0, 0.2);
+        --selection-bg: rgba(0, 56, 255, 0.15);
+        --card-hover-bg: rgba(0, 56, 255, 0.04);
+        --noise-opacity: 0.02;
+        --input-focus-shadow: 0 0 0 2px rgba(0, 56, 255, 0.15), 0 0 20px rgba(0, 56, 255, 0.05);
+      }
+
       /* ========== BASE ========== */
       * { box-sizing: border-box; }
 
       body {
         font-family: 'Inter', system-ui, sans-serif;
-        background-color: #050508;
-        color: #e2e8f0;
+        background-color: var(--bg-base);
+        color: var(--text-primary);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         overflow-x: hidden;
+        transition: background-color 0.4s ease, color 0.4s ease;
       }
 
       /* ========== SCROLL REVEAL SYSTEM ========== */
@@ -163,16 +286,18 @@
 
       /* ========== GLASSMORPHISM ========== */
       .glass {
-        background: rgba(255, 255, 255, 0.03);
+        background: var(--glass-bg);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--glass-border);
+        transition: background 0.4s ease, border-color 0.4s ease;
       }
       .glass-strong {
-        background: rgba(255, 255, 255, 0.06);
+        background: var(--glass-bg-strong);
         backdrop-filter: blur(24px);
         -webkit-backdrop-filter: blur(24px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--glass-border-strong);
+        transition: background 0.4s ease, border-color 0.4s ease;
       }
 
       /* ========== CURSOR GLOW ========== */
@@ -182,22 +307,84 @@
         height: 800px;
         border-radius: 50%;
         pointer-events: none;
-        background: radial-gradient(circle, rgba(99, 102, 241, 0.04) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(200, 255, 0, 0.025) 0%, transparent 70%);
         transform: translate(-50%, -50%);
         z-index: 1;
         transition: left 0.15s ease-out, top 0.15s ease-out;
         will-change: left, top;
       }
 
+      /* ========== PAGE LOADER ========== */
+      .page-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background: var(--bg-base);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+      }
+      .page-loader.loaded {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .page-loader .loader-bar {
+        width: 60px;
+        height: 2px;
+        background: var(--glass-border);
+        border-radius: 2px;
+        overflow: hidden;
+        position: relative;
+      }
+      .page-loader .loader-bar::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--accent);
+        border-radius: 2px;
+        animation: loaderFill 1.2s ease-out forwards;
+      }
+      @keyframes loaderFill {
+        from { transform: scaleX(0); transform-origin: left; }
+        to { transform: scaleX(1); transform-origin: left; }
+      }
+
+      /* ========== SMOOTH SCROLL PROGRESS BAR ========== */
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 2px;
+        background: var(--accent);
+        z-index: 9999;
+        transform-origin: left;
+        transition: transform 0.1s linear;
+      }
+
+      /* ========== BOUNCE SLOW ========== */
+      @keyframes bounce-slow {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+      }
+      .animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
+
+      /* ========== ACCENT COLOR ========== */
+      .text-accent { color: var(--accent); }
+      .bg-accent { background-color: var(--accent); }
+      .bg-accent-soft { background-color: var(--accent-soft); }
+      .border-accent { border-color: var(--accent); }
+
       /* ========== TEXT GRADIENT ========== */
       .text-gradient {
-        background: linear-gradient(135deg, #3b82f6, #8b5cf6, #6366f1);
+        background: linear-gradient(135deg, var(--accent), #ece8e1);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
       }
       .text-gradient-animated {
-        background: linear-gradient(270deg, #3b82f6, #8b5cf6, #6366f1, #3b82f6);
+        background: linear-gradient(270deg, var(--accent), #ece8e1, var(--accent), #ece8e1);
         background-size: 300% 300%;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -224,7 +411,10 @@
         pointer-events: none;
       }
       .card-glow:hover::before {
-        background: linear-gradient(135deg, rgba(99,102,241,0.4), rgba(139,92,246,0.2), rgba(59,130,246,0.4));
+        background: linear-gradient(135deg, rgba(200,255,0,0.15), rgba(255,255,255,0.05), rgba(200,255,0,0.15));
+      }
+      html.light .card-glow:hover::before {
+        background: linear-gradient(135deg, rgba(0,56,255,0.15), rgba(0,0,0,0.03), rgba(0,56,255,0.15));
       }
 
       /* ========== BUTTON LIGHT SWEEP ========== */
@@ -249,12 +439,13 @@
       /* ========== NOISE TEXTURE ========== */
       .bg-noise {
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        opacity: var(--noise-opacity);
       }
 
       /* ========== DARK GRID ========== */
       .bg-grid-dark {
-        background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+                          linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
         background-size: 64px 64px;
       }
 
@@ -269,9 +460,9 @@
 
       /* Custom thin scrollbar for body */
       ::-webkit-scrollbar { width: 6px; }
-      ::-webkit-scrollbar-track { background: #050508; }
-      ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
-      ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+      ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+      ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+      ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
 
       /* ========== GLOW UTILITIES ========== */
       .glow-blue { box-shadow: 0 0 40px rgba(59, 130, 246, 0.15), 0 0 80px rgba(59, 130, 246, 0.05); }
@@ -283,7 +474,7 @@
 
       /* ========== FOCUS GLOW FOR INPUTS ========== */
       input:focus, textarea:focus {
-        box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3), 0 0 30px rgba(99, 102, 241, 0.1);
+        box-shadow: var(--input-focus-shadow);
       }
 
       /* ========== LIGHT RAY ACCENTS ========== */
@@ -298,9 +489,33 @@
 
       /* ========== SELECTION ========== */
       ::selection {
-        background: rgba(99, 102, 241, 0.3);
-        color: #fff;
+        background: var(--selection-bg);
+        color: var(--text-primary);
       }
+
+      /* ========== LIGHT THEME OVERRIDES ========== */
+      html.light .cursor-glow {
+        background: radial-gradient(circle, rgba(0, 56, 255, 0.04) 0%, transparent 70%);
+      }
+      html.light .text-gradient {
+        background: linear-gradient(135deg, var(--accent), #1a1a1e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      html.light .text-gradient-animated {
+        background: linear-gradient(270deg, var(--accent), #1a1a1e, var(--accent), #1a1a1e);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradientShift 8s ease infinite;
+      }
+
+      /* ========== THEME-AWARE TEXT ========== */
+      .text-heading { color: var(--text-primary); }
+      .text-body { color: var(--text-secondary); }
+      .text-muted-theme { color: var(--text-muted); }
     </style>
 
 <link rel="stylesheet" href="/index.css">
@@ -315,11 +530,10 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-DKOwFPO1.js"></script>
+  <script type="module" crossorigin src="/assets/index-DPkWGdJ_.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/react-vendor-Bzgz95E1.js">
   <link rel="modulepreload" crossorigin href="/assets/motion-DaRzU1Y3.js">
-  <link rel="modulepreload" crossorigin href="/assets/lucide-CftsFvm2.js">
-  <link rel="modulepreload" crossorigin href="/assets/google-ai-B8rL7Oeq.js">
+  <link rel="modulepreload" crossorigin href="/assets/lucide-CuWod28J.js">
 </head>
   <body>
     <div id="root"></div>

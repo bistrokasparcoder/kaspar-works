@@ -66,9 +66,9 @@ function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     if (typeof window !== 'undefined') {
-      return (localStorage.getItem('theme') as 'dark' | 'light') || 'dark';
+      return (localStorage.getItem('theme') as 'dark' | 'light') || 'light';
     }
-    return 'dark';
+    return 'light';
   });
   const cursorRef = useRef<HTMLDivElement>(null);
   const trailRefs = useRef<HTMLDivElement[]>([]);

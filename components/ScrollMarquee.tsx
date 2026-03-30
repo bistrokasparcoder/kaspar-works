@@ -23,7 +23,7 @@ const ScrollMarquee: React.FC = () => {
       <motion.div style={{ x: x1 }} className="flex gap-6 md:gap-10 mb-6 md:mb-8 whitespace-nowrap">
         {[...words, ...words, ...words].map((word, i) => (
           <React.Fragment key={i}>
-            <span className="text-[clamp(2rem,6vw,5rem)] font-display font-bold tracking-[-0.03em] text-[var(--text-primary)] opacity-[0.07]">
+            <span className="text-[clamp(2rem,6vw,5rem)] font-display font-bold tracking-[-0.03em] text-[var(--text-primary)] opacity-[0.15]">
               {word}
             </span>
             <span className="text-[clamp(2rem,6vw,5rem)] font-serif italic text-[var(--accent)] opacity-20">
@@ -37,7 +37,7 @@ const ScrollMarquee: React.FC = () => {
       <motion.div style={{ x: x2 }} className="flex gap-6 md:gap-10 whitespace-nowrap">
         {[...words.reverse(), ...words, ...words].map((word, i) => (
           <React.Fragment key={i}>
-            <span className="text-[clamp(2rem,6vw,5rem)] font-display font-bold tracking-[-0.03em] text-[var(--text-primary)] opacity-[0.07]">
+            <span className="text-[clamp(2rem,6vw,5rem)] font-display font-bold tracking-[-0.03em] text-[var(--text-primary)] opacity-[0.15]">
               {word}
             </span>
             <span className="text-[clamp(2rem,6vw,5rem)] font-serif italic text-[var(--accent)] opacity-20">
