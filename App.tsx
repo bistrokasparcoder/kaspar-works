@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import Lenis from 'lenis';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
 import ContactModal from './components/Contact/ContactModal';
-import Home from './pages/Home';
+import Home from './pages/HomeV2';
 import AppsPage from './pages/AppsPage';
 import InspiredPage from './pages/InspiredPage';
 import DialysisPage from './pages/DialysisPage';
@@ -71,7 +72,6 @@ function App() {
     return 'light';
   });
   const cursorRef = useRef<HTMLDivElement>(null);
-  const trailRefs = useRef<HTMLDivElement[]>([]);
   const progressRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
 
@@ -79,6 +79,27 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 1400);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Global Lenis smooth scroll
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.4,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.5,
+    });
+    let frame: number;
+    const raf = (time: number) => {
+      lenis.raf(time);
+      frame = requestAnimationFrame(raf);
+    };
+    frame = requestAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(frame);
+      lenis.destroy();
+    };
   }, []);
 
   // Scroll progress bar
@@ -99,12 +120,11 @@ function App() {
 
   const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
 
-  // Cursor glow + trail
+  // Single cursor glow — no trail. Smooth lerp follow for calm restraint.
   useEffect(() => {
     let animationId: number;
     let targetX = 0, targetY = 0;
     let currentX = 0, currentY = 0;
-    const trail: { x: number; y: number }[] = Array.from({ length: 8 }, () => ({ x: 0, y: 0 }));
 
     const handleMouseMove = (e: MouseEvent) => {
       targetX = e.clientX;
@@ -112,27 +132,12 @@ function App() {
     };
 
     const animate = () => {
-      currentX += (targetX - currentX) * 0.08;
-      currentY += (targetY - currentY) * 0.08;
+      currentX += (targetX - currentX) * 0.1;
+      currentY += (targetY - currentY) * 0.1;
       if (cursorRef.current) {
         cursorRef.current.style.left = `${currentX}px`;
         cursorRef.current.style.top = `${currentY}px`;
       }
-
-      // Trail follows with increasing lag
-      for (let i = 0; i < trail.length; i++) {
-        const prev = i === 0 ? { x: currentX, y: currentY } : trail[i - 1];
-        trail[i].x += (prev.x - trail[i].x) * (0.15 - i * 0.012);
-        trail[i].y += (prev.y - trail[i].y) * (0.15 - i * 0.012);
-        const el = trailRefs.current[i];
-        if (el) {
-          el.style.left = `${trail[i].x}px`;
-          el.style.top = `${trail[i].y}px`;
-          el.style.opacity = `${0.4 - i * 0.05}`;
-          el.style.transform = `translate(-50%, -50%) scale(${1 - i * 0.1})`;
-        }
-      }
-
       animationId = requestAnimationFrame(animate);
     };
 
@@ -151,8 +156,15 @@ function App() {
         {/* Page Loader */}
         <div className={`page-loader ${loaded ? 'loaded' : ''}`}>
           <div className="flex flex-col items-center gap-6">
-            <span className="font-display text-lg font-bold tracking-tight text-[var(--text-primary)]">
-              Kaspar<span className="text-[var(--text-muted)]">Works</span>
+            <img
+              src="/logo.png"
+              alt="Kaspar Works"
+              className="h-20 w-20 object-contain"
+              loading="eager"
+              decoding="async"
+            />
+            <span className="font-editorial text-base font-extrabold tracking-[-0.02em] text-[var(--text-primary)]">
+              kaspar<span className="text-[var(--accent)]">:</span>works
             </span>
             <div className="loader-bar" />
           </div>
@@ -161,16 +173,8 @@ function App() {
         {/* Scroll Progress */}
         <div ref={progressRef} className="scroll-progress" style={{ transform: 'scaleX(0)' }} />
 
-        {/* Cursor Glow + Trail */}
+        {/* Cursor Glow */}
         <div ref={cursorRef} className="cursor-glow hidden lg:block" />
-        {Array.from({ length: 8 }).map((_, i) => (
-          <div
-            key={i}
-            ref={(el) => { if (el) trailRefs.current[i] = el; }}
-            className="fixed w-2 h-2 rounded-full pointer-events-none z-[999] hidden lg:block"
-            style={{ background: 'var(--accent)', opacity: 0, transition: 'none' }}
-          />
-        ))}
 
         {/* Noise Texture */}
         <div className="fixed inset-0 bg-noise pointer-events-none z-[1]" />

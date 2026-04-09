@@ -1,7 +1,7 @@
 # Kaspar Works Inc. — Website
 
 ## Project Overview
-Portfolio website for Kaspar Works Inc., a product studio building purpose-driven platforms across faith, healthcare, and sports. Showcases three products: Inspired By The Cross, dialysis.live, and CricketBolt.
+Portfolio website for Kaspar Works Inc., a product studio building purpose-driven platforms across faith, healthcare, and wellness. Showcases Inspired By The Cross, dialysis.live, and Ullam.
 
 ## Tech Stack
 - **Framework**: React 19 + TypeScript
@@ -54,7 +54,6 @@ components/
     About.tsx       # Bento grid about section with staggered GlowCards
     Flagship.tsx    # Inspired By The Cross showcase
     Dialysis.tsx    # dialysis.live showcase
-    CricketBolt.tsx # CricketBolt showcase
     Mission.tsx     # Mission pillars + capabilities grid
     Apps.tsx        # Full portfolio page content
   Contact/
@@ -83,7 +82,7 @@ types.ts            # Shared TypeScript interfaces
 - Use `card-glow` CSS class on interactive cards for hover border glow
 - Use `<GlowCard>` for spring-physics hover lift on cards
 - Use `<MagneticButton>` or `motion.button` with `whileHover`/`whileTap` for buttons
-- Color accents per product: indigo/purple (Inspired By The Cross), emerald/teal (dialysis.live), lime/green (CricketBolt)
+- Color accents per product: indigo/purple (Inspired By The Cross), emerald/teal (dialysis.live), lavender/rose (Ullam)
 - Icons from `lucide-react` only
 - CSS keyframe animations (in Tailwind config) for background effects (blob, breathe, glow-pulse)
 - Framer Motion for all user-facing/interactive animations

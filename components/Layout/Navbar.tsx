@@ -53,10 +53,11 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact, theme = 'dark', onToggle
   }, [activeSection, location.pathname]);
 
   const navLinks = [
-    { name: 'About', href: '#about', isRoute: false },
-    { name: 'Products', href: '#products', isRoute: false },
+    { name: 'Services', href: '#capabilities-bento', isRoute: false },
+    { name: 'Work', href: '#product-scrub', isRoute: false },
+    { name: 'Process', href: '#process-rail', isRoute: false },
+    { name: 'About', href: '#manifesto-pin', isRoute: false },
     { name: 'Apps', href: '/apps', isRoute: true },
-    { name: 'Mission', href: '#mission', isRoute: false },
   ];
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -90,9 +91,19 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact, theme = 'dark', onToggle
           <Link
             to="/"
             onClick={() => { if (location.pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="font-display text-lg font-bold tracking-tight text-[var(--text-primary)] shrink-0"
+            className="flex items-center gap-2.5 shrink-0"
+            aria-label="Kaspar Works home"
           >
-            Kaspar<span className="text-[var(--text-muted)]">Works</span>
+            <img
+              src="/logo.png"
+              alt=""
+              className="h-8 w-8 object-contain"
+              loading="eager"
+              decoding="async"
+            />
+            <span className="font-editorial text-lg font-extrabold tracking-[-0.02em] text-[var(--text-primary)]">
+              kaspar<span className="text-[var(--accent)]">:</span>works
+            </span>
           </Link>
 
           {/* Desktop Links */}
@@ -149,7 +160,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact, theme = 'dark', onToggle
               onClick={handleContactClick}
               className="px-5 py-2 text-sm font-bold rounded-full bg-[var(--accent)] text-[var(--bg-base)] hover:opacity-90 transition-opacity"
             >
-              Get in Touch
+              Book a call
             </motion.button>
           </div>
 
@@ -176,25 +187,35 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenContact, theme = 'dark', onToggle
               transition={{ duration: 0.3, delay: 0.1 }}
               className="text-center space-y-8"
             >
+              <motion.img
+                src="/logo.png"
+                alt=""
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                className="h-16 w-16 mx-auto object-contain mb-4"
+                loading="eager"
+                decoding="async"
+              />
               {navLinks.map((link, i) => {
                 const isActive = link.isRoute ? location.pathname === link.href : activeSection === link.href.substring(1);
                 return link.isRoute ? (
                   <motion.div key={link.name} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.05 }}>
-                    <Link to={link.href} className={`block text-3xl font-display font-bold ${isActive ? 'text-gradient' : 'text-[var(--text-primary)]'}`} onClick={() => setIsOpen(false)}>{link.name}</Link>
+                    <Link to={link.href} className={`block text-3xl font-editorial font-extrabold ${isActive ? 'text-gradient' : 'text-[var(--text-primary)]'}`} onClick={() => setIsOpen(false)}>{link.name}</Link>
                   </motion.div>
                 ) : (
                   <motion.div key={link.name} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.05 }}>
-                    <a href={link.href} className={`block text-3xl font-display font-bold ${isActive ? 'text-gradient' : 'text-[var(--text-primary)]'}`} onClick={(e) => scrollToSection(e, link.href)}>{link.name}</a>
+                    <a href={link.href} className={`block text-3xl font-editorial font-extrabold ${isActive ? 'text-gradient' : 'text-[var(--text-primary)]'}`} onClick={(e) => scrollToSection(e, link.href)}>{link.name}</a>
                   </motion.div>
                 );
               })}
               <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="pt-10 flex flex-col items-center gap-6">
                 <button onClick={handleContactClick} className="px-8 py-3 text-lg font-bold text-[#0c0c0e] bg-[var(--accent)] rounded-full">
-                  Let's Talk
+                  Book a call
                 </button>
                 <button onClick={onToggleTheme} className="flex items-center gap-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">
                   {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-                  <span className="text-sm">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+                  <span className="text-sm">{theme === 'dark' ? 'Light mode' : 'Dark mode'}</span>
                 </button>
               </motion.div>
             </motion.div>

@@ -1,116 +1,300 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Download, ExternalLink } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { FadeUp } from '../components/motion';
-import TiltCard from '../components/ui/TiltCard';
+import { motion, useInView } from 'framer-motion';
+import EditorialButton, { EyebrowLabel } from '../components/ui/EditorialButton';
 
-const ease = [0.16, 1, 0.3, 1];
+const ease = [0.16, 1, 0.3, 1] as const;
+
+interface AppItem {
+  number: string;
+  category: string;
+  title: React.ReactNode;
+  flatTitle: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  imageAspect: string;
+  href: string;
+  externalHref?: string;
+  externalLabel?: string;
+  status: string;
+  accent: string;
+}
+
+const items: AppItem[] = [
+  {
+    number: '/ 01',
+    category: 'Faith · Mobile · Consumer',
+    title: (
+      <>
+        Inspired By
+        <br />
+        The <span className="font-fraunces italic font-normal text-[var(--accent)]">Cross</span>
+      </>
+    ),
+    flatTitle: 'Inspired By The Cross',
+    description:
+      'A mobile-first faith platform featuring daily devotionals, scripture, and community prayer. Built as a native iOS app with a scalable backend, shipped end to end.',
+    image: '/inspired-mobile-screenshot.png',
+    imageAlt: 'Inspired By The Cross app',
+    imageAspect: 'aspect-[9/19]',
+    href: '/inspired',
+    externalHref: 'https://apps.apple.com/us/app/inspired-by-the-cross/id6742165428',
+    externalLabel: 'Download iOS',
+    status: 'Available on the App Store',
+    accent: 'from-amber-400/18 via-orange-400/10 to-transparent',
+  },
+  {
+    number: '/ 02',
+    category: 'Healthcare · Web + Mobile',
+    title: (
+      <>
+        dialysis
+        <span className="font-fraunces italic font-normal text-[var(--accent)]">.live</span>
+      </>
+    ),
+    flatTitle: 'dialysis.live',
+    description:
+      'A patient-focused health tracking platform with dashboards, vitals, nutrition logs, and medication reminders. Built across web, iOS, and Android, with AI-assisted insights for patients and care teams.',
+    image: '/dialysis-web-screenshot.png',
+    imageAlt: 'dialysis.live dashboard',
+    imageAspect: 'aspect-[16/10]',
+    href: '/dialysis',
+    externalHref: 'https://dialysis.live/',
+    externalLabel: 'Visit Site',
+    status: 'Currently in production',
+    accent: 'from-teal-400/20 via-emerald-400/10 to-transparent',
+  },
+  {
+    number: '/ 03',
+    category: 'Wellness · Mobile · Consumer',
+    title: (
+      <>
+        <span className="font-fraunces italic font-normal text-[var(--accent)]">Ullam</span>
+      </>
+    ),
+    flatTitle: 'Ullam',
+    description:
+      'An emotional wellness app with AI-powered journaling and mood tracking, designed to help users reflect, express, and grow emotionally. Clean, calm, and quietly intelligent by design.',
+    image: '',
+    imageAlt: 'Ullam emotional wellness app',
+    imageAspect: 'aspect-[16/10]',
+    href: '/apps',
+    status: 'Currently in design',
+    accent: 'from-fuchsia-300/20 via-rose-300/10 to-transparent',
+  },
+];
 
 const AppsPage: React.FC = () => {
+  const headRef = useRef<HTMLDivElement>(null);
+  const headInView = useInView(headRef, { once: true, margin: '-20%' });
+
   return (
-    <div className="pt-24">
-      {/* Hero */}
-      <section className="relative overflow-hidden py-16 sm:py-24 md:py-32">
-        <div className="absolute inset-0 bg-surface" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-          <FadeUp>
-            <div className="flex items-center justify-center gap-3 mb-8">
-              <div className="w-2 h-2 rounded-full bg-[var(--accent)]" />
-              <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[var(--text-muted)]">Portfolio</span>
-            </div>
-            <h1 className="text-[clamp(2.5rem,7vw,6rem)] font-display font-bold tracking-[-0.04em] text-[var(--text-primary)] leading-[0.95] mb-6">
-              Our <span className="font-serif italic font-normal text-[var(--accent)]">Apps</span>
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
-              Purpose-driven products across faith and healthcare — each engineered to deliver real impact.
-            </p>
-          </FadeUp>
+    <div className="relative" style={{ background: 'var(--bg-base)' }}>
+      {/* ── Hero ─────────────────────────────────── */}
+      <section className="relative pt-[20vh] sm:pt-[24vh] pb-20 sm:pb-32 overflow-hidden">
+        {/* backdrop wordmark */}
+        <div className="absolute inset-x-0 top-[8vh] flex justify-center pointer-events-none select-none">
+          <h2
+            className="font-editorial font-extrabold leading-[0.78] whitespace-nowrap opacity-[0.05] text-[var(--text-primary)]"
+            style={{ fontSize: 'clamp(7rem, 22vw, 22rem)', letterSpacing: '-0.06em' }}
+          >
+            portfolio
+          </h2>
+        </div>
+
+        <div className="relative max-w-[100rem] mx-auto px-6 sm:px-10 lg:px-16" ref={headRef}>
+          <EyebrowLabel className="mb-10">Selected Work · 2024 / 2026</EyebrowLabel>
+
+          <h1 className="font-editorial font-extrabold leading-[0.88] tracking-[-0.045em] text-[var(--text-primary)] text-[clamp(3rem,10vw,10rem)]">
+            <span className="inline-block overflow-hidden align-bottom">
+              <motion.span
+                className="inline-block"
+                initial={{ y: '110%' }}
+                animate={headInView ? { y: 0 } : { y: '110%' }}
+                transition={{ duration: 1.0, delay: 0.2, ease }}
+              >
+                Our&nbsp;
+              </motion.span>
+            </span>
+            <span className="inline-block overflow-hidden align-bottom">
+              <motion.span
+                className="inline-block font-fraunces italic font-normal text-[var(--accent)]"
+                initial={{ y: '110%' }}
+                animate={headInView ? { y: 0 } : { y: '110%' }}
+                transition={{ duration: 1.0, delay: 0.35, ease }}
+              >
+                portfolio.
+              </motion.span>
+            </span>
+          </h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={headInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.55, ease }}
+            className="mt-10 text-base sm:text-lg leading-relaxed text-[var(--text-primary)] max-w-xl"
+          >
+            Alongside client work, we ship our own products across faith, healthcare,
+            and wellness. Every one designed, engineered, and shipped end to end by
+            the same team that builds for our clients.
+          </motion.p>
+
+          {/* drawing diagonal hairline */}
+          <svg
+            className="mt-12 w-full h-[1px]"
+            viewBox="0 0 1000 1"
+            preserveAspectRatio="none"
+          >
+            <motion.line
+              x1="0"
+              y1="0.5"
+              x2="1000"
+              y2="0.5"
+              stroke="var(--glass-border-strong)"
+              strokeWidth="1"
+              initial={{ pathLength: 0 }}
+              animate={headInView ? { pathLength: 1 } : { pathLength: 0 }}
+              transition={{ duration: 1.6, delay: 0.7, ease }}
+            />
+          </svg>
         </div>
       </section>
 
-      {/* Inspired By The Cross */}
-      <section className="relative py-16 sm:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-surface" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          <FadeUp>
-            <Link to="/inspired" className="block group">
-              <TiltCard className="rounded-[1.25rem] sm:rounded-[1.5rem] border border-[var(--glass-border)] hover:border-[var(--glass-border-strong)] transition-all overflow-hidden" intensity={4}>
-                <div className="absolute inset-0 bg-surface-50 group-hover:bg-surface-100 transition-colors duration-500" />
-                <div className="relative z-10 p-6 sm:p-10 md:p-16 flex flex-col lg:flex-row items-start lg:items-center gap-8 sm:gap-12">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                      <div className="w-3 h-3 rounded-full bg-[var(--accent)]" />
-                      <span className="text-sm font-semibold text-[var(--accent)] tracking-wide uppercase">Faith</span>
-                    </div>
-                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-bold text-[var(--text-primary)] tracking-[-0.03em] leading-[0.95] mb-4 sm:mb-6">
-                      Inspired By<br />The <span className="font-serif italic font-normal text-[var(--accent)]">Cross</span>
-                    </h2>
-                    <p className="text-sm sm:text-base md:text-lg text-[var(--text-secondary)] leading-relaxed max-w-xl mb-6 sm:mb-8">
-                      A digital sanctuary for your spiritual journey — daily devotionals, scripture, community prayer, and AI-powered conversations about faith.
-                    </p>
-                    <motion.button
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                      onClick={(e) => { e.preventDefault(); window.open('https://apps.apple.com/us/app/inspired-by-the-cross/id6742165428', '_blank'); }}
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--accent)] text-[var(--bg-base)] font-bold text-sm"
-                    >
-                      <Download size={16} /> Download for iOS
-                    </motion.button>
-                  </div>
-                  <div className="w-[140px] sm:w-[200px] md:w-[240px] shrink-0">
-                    <div className="bg-surface-200 rounded-[1.25rem] overflow-hidden shadow-2xl border border-[var(--glass-border)]" style={{ aspectRatio: '9/19' }}>
-                      <img src="/inspired-mobile-screenshot.png" alt="Inspired By The Cross" className="w-full h-full object-cover" loading="lazy" />
-                    </div>
-                  </div>
-                </div>
-              </TiltCard>
-            </Link>
-          </FadeUp>
-        </div>
-      </section>
-
-      {/* dialysis.live */}
-      <section className="relative py-16 sm:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-surface" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          <FadeUp>
-            <Link to="/dialysis" className="block group">
-              <TiltCard className="rounded-[1.25rem] sm:rounded-[1.5rem] border border-[var(--glass-border)] hover:border-[var(--glass-border-strong)] transition-all overflow-hidden" intensity={4}>
-                <div className="absolute inset-0 bg-surface-50 group-hover:bg-surface-100 transition-colors duration-500" />
-                <div className="relative z-10 p-6 sm:p-10 md:p-16 flex flex-col lg:flex-row items-start lg:items-center gap-8 sm:gap-12">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                      <div className="w-3 h-3 rounded-full bg-[var(--accent)]" />
-                      <span className="text-sm font-semibold text-[var(--accent)] tracking-wide uppercase">Healthcare</span>
-                    </div>
-                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-bold tracking-[-0.03em] leading-[0.95] mb-4 sm:mb-6">
-                      <span className="text-[var(--text-primary)]">dialysis</span><span className="font-serif italic font-normal text-[var(--accent)]">.live</span>
-                    </h2>
-                    <p className="text-sm sm:text-base md:text-lg text-[var(--text-secondary)] leading-relaxed max-w-xl mb-6 sm:mb-8">
-                      Clinical-grade renal companion — track treatments, vitals, nutrition, and medications with AI-powered insights for better health outcomes.
-                    </p>
-                    <motion.button
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                      onClick={(e) => { e.preventDefault(); window.open('https://dialysis.live/', '_blank'); }}
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--accent)] text-[var(--bg-base)] font-bold text-sm"
-                    >
-                      Visit Website <ExternalLink size={16} />
-                    </motion.button>
-                  </div>
-                  <div className="w-[200px] sm:w-[280px] md:w-[340px] shrink-0">
-                    <div className="bg-surface-200 rounded-[0.75rem] overflow-hidden shadow-2xl border border-[var(--glass-border)]">
-                      <img src="/dialysis-web-screenshot.png" alt="dialysis.live" className="w-full h-auto" loading="lazy" />
-                    </div>
-                  </div>
-                </div>
-              </TiltCard>
-            </Link>
-          </FadeUp>
+      {/* ── Cards ────────────────────────────────── */}
+      <section className="relative pb-32 sm:pb-48 overflow-hidden">
+        <div className="relative max-w-[100rem] mx-auto px-6 sm:px-10 lg:px-16 space-y-32 sm:space-y-48">
+          {items.map((item, i) => (
+            <AppCard key={item.number} item={item} index={i} />
+          ))}
         </div>
       </section>
     </div>
+  );
+};
+
+const AppCard: React.FC<{ item: AppItem; index: number }> = ({ item, index }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-15%' });
+  const isEven = index % 2 === 0;
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 80 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
+      transition={{ duration: 1.0, ease }}
+      className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center ${
+        isEven ? '' : 'lg:[&>*:first-child]:order-2'
+      }`}
+    >
+      {/* Image */}
+      <div className="lg:col-span-7 relative">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3, ease }}
+          className="relative inline-flex items-center gap-2 px-4 py-2 rounded-t-xl border border-b-0 border-[var(--glass-border-strong)] bg-[var(--bg-100)] -mb-px ml-2"
+        >
+          <span className="font-mono text-[10px] tracking-wider text-[var(--text-secondary)]">
+            {item.number}
+          </span>
+          <span className="w-1 h-1 rounded-full bg-[var(--accent)]" />
+        </motion.div>
+
+        <Link
+          to={item.href}
+          className={`relative block rounded-[1.5rem] sm:rounded-[2rem] border border-[var(--glass-border-strong)] bg-[var(--bg-100)] overflow-hidden ${
+            item.imageAspect === 'aspect-[9/19]' ? 'aspect-[16/10]' : item.imageAspect
+          } shadow-2xl shadow-black/40 group`}
+        >
+          <div
+            className={`absolute inset-0 bg-gradient-to-br ${item.accent} pointer-events-none z-[1]`}
+          />
+          {item.image ? (
+            <motion.img
+              initial={{ scale: 1.08 }}
+              animate={inView ? { scale: 1 } : { scale: 1.08 }}
+              transition={{ duration: 1.6, ease }}
+              src={item.image}
+              alt={item.imageAlt}
+              className="relative z-[1] w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+          ) : (
+            <div className="relative z-[2] w-full h-full flex flex-col items-center justify-center gap-6 px-8">
+              <div className="flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase text-[var(--text-muted)] font-mono">
+                <span className="inline-block w-6 h-px bg-[var(--text-muted)]" />
+                <span>Daily check-in</span>
+              </div>
+              <div className="font-fraunces italic font-normal text-[clamp(1.6rem,4vw,3rem)] text-[var(--text-primary)]/60 leading-[1.1] text-center max-w-[80%]">
+                How are you{' '}
+                <span className="text-[var(--accent)]">really</span> feeling today?
+              </div>
+              <div className="flex gap-2 flex-wrap justify-center">
+                {['Calm', 'Anxious', 'Hopeful', 'Tired'].map((mood) => (
+                  <span
+                    key={mood}
+                    className="px-3 py-1 rounded-full border border-[var(--glass-border-strong)] bg-[var(--glass-bg)] text-[10px] font-medium text-[var(--text-secondary)]"
+                  >
+                    {mood}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+          {['top-3 left-3', 'top-3 right-3', 'bottom-3 left-3', 'bottom-3 right-3'].map(
+            (pos) => (
+              <div
+                key={pos}
+                className={`absolute ${pos} w-3 h-3 z-[2] pointer-events-none`}
+              >
+                <div className="absolute inset-0 border-l border-t border-white/30" />
+              </div>
+            ),
+          )}
+        </Link>
+      </div>
+
+      {/* Text */}
+      <div className="lg:col-span-5 flex flex-col gap-6">
+        <EyebrowLabel>{item.category}</EyebrowLabel>
+
+        <h2 className="font-editorial font-extrabold tracking-[-0.03em] leading-[0.95] text-[var(--text-primary)] text-[clamp(2.4rem,5vw,5rem)]">
+          {item.title}
+        </h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.6, ease }}
+          className="text-base sm:text-lg leading-relaxed text-[var(--text-secondary)] max-w-md"
+        >
+          {item.description}
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.8, ease }}
+          className="flex flex-wrap items-center gap-4 mt-2"
+        >
+          <EditorialButton href={item.href}>View Case Study</EditorialButton>
+          {item.externalHref && (
+            <a
+              href={item.externalHref}
+              target="_blank"
+              rel="noreferrer"
+              className="text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors underline-offset-4 hover:underline"
+            >
+              {item.externalLabel} ↗
+            </a>
+          )}
+          <span className="text-[10px] tracking-[0.2em] uppercase text-[var(--text-muted)] ml-auto">
+            {item.status}
+          </span>
+        </motion.div>
+      </div>
+    </motion.div>
   );
 };
 

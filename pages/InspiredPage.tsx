@@ -1,179 +1,360 @@
-import React from 'react';
-import { BookOpen, MessageCircle, Sparkles, Heart, HandHeart, Download, ArrowRight, ExternalLink, Quote } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { FadeUp, BlurIn, Stagger, StaggerItem, FloatingElement } from '../components/motion';
-import TiltCard from '../components/ui/TiltCard';
+import React, { useRef } from 'react';
+import { BookOpen, MessageCircle, Sparkles, HandHeart } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
+import EditorialButton, { EyebrowLabel } from '../components/ui/EditorialButton';
 
-const ease = [0.16, 1, 0.3, 1];
+const ease = [0.16, 1, 0.3, 1] as const;
 
 const features = [
-  { icon: <Sparkles size={28} />, title: "Daily Devotion", desc: "Fresh spiritual insights delivered to your heart every morning. Start each day grounded.", color: "text-amber-400" },
-  { icon: <BookOpen size={28} />, title: "Scripture Library", desc: "The full Bible at your fingertips with search, bookmarks, and highlight tools.", color: "text-blue-400" },
-  { icon: <HandHeart size={28} />, title: "Prayer Community", desc: "Share prayer requests, uplift others, and experience the power of collective faith.", color: "text-purple-400" },
-  { icon: <MessageCircle size={28} />, title: "AI Faith Chat", desc: "Ask questions about scripture, theology, and faith — powered by thoughtful AI.", color: "text-emerald-400" },
+  {
+    num: '01',
+    icon: <Sparkles size={24} />,
+    title: 'Daily Devotion',
+    desc: 'A new devotional every morning. Short, grounded, and written to start the day with intent.',
+  },
+  {
+    num: '02',
+    icon: <BookOpen size={24} />,
+    title: 'Scripture Library',
+    desc: 'The full Bible with search, bookmarks, and highlight tools built for daily use.',
+  },
+  {
+    num: '03',
+    icon: <HandHeart size={24} />,
+    title: 'Prayer Community',
+    desc: 'Share prayer requests and support others in a quiet, respectful community space.',
+  },
+  {
+    num: '04',
+    icon: <MessageCircle size={24} />,
+    title: 'AI Faith Chat',
+    desc: 'Ask questions about scripture, theology, and faith, powered by thoughtful AI.',
+  },
 ];
 
 const InspiredPage: React.FC = () => {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const heroIn = useInView(heroRef, { once: true, margin: '-20%' });
+
   return (
-    <div className="pt-24">
-      {/* Hero */}
-      <section className="relative overflow-hidden py-16 sm:py-20 md:py-32">
-        <div className="absolute inset-0 bg-surface" />
+    <div className="relative" style={{ background: 'var(--bg-base)' }}>
+      {/* ── Hero ─────────────────────────────────── */}
+      <section className="relative pt-[18vh] sm:pt-[22vh] pb-24 sm:pb-32 overflow-hidden">
+        <div className="absolute inset-x-0 top-[6vh] flex justify-center pointer-events-none select-none">
+          <h2
+            className="font-editorial font-extrabold leading-[0.78] whitespace-nowrap opacity-[0.05] text-[var(--text-primary)]"
+            style={{ fontSize: 'clamp(7rem, 22vw, 22rem)', letterSpacing: '-0.06em' }}
+          >
+            inspired
+          </h2>
+        </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
+        <div ref={heroRef} className="relative max-w-[100rem] mx-auto px-6 sm:px-10 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-end">
+          {/* Left: text */}
+          <div className="lg:col-span-7">
+            <EyebrowLabel className="mb-10">Faith · iOS · Live on App Store</EyebrowLabel>
 
-            <div className="flex-1 max-w-2xl">
-              <FadeUp>
-                <div className="flex items-center gap-3 mb-6 sm:mb-8">
-                  <div className="w-2 h-2 rounded-full bg-[var(--accent)]" />
-                  <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[var(--text-muted)]">Live on App Store</span>
-                </div>
-              </FadeUp>
+            <h1 className="font-editorial font-extrabold leading-[0.88] tracking-[-0.045em] text-[var(--text-primary)] text-[clamp(3rem,9vw,9rem)]">
+              <span className="block">
+                <span className="inline-block overflow-hidden align-bottom">
+                  <motion.span
+                    className="inline-block"
+                    initial={{ y: '110%' }}
+                    animate={heroIn ? { y: 0 } : { y: '110%' }}
+                    transition={{ duration: 1.0, delay: 0.2, ease }}
+                  >
+                    Inspired
+                  </motion.span>
+                </span>
+              </span>
+              <span className="block">
+                <span className="inline-block overflow-hidden align-bottom">
+                  <motion.span
+                    className="inline-block"
+                    initial={{ y: '110%' }}
+                    animate={heroIn ? { y: 0 } : { y: '110%' }}
+                    transition={{ duration: 1.0, delay: 0.32, ease }}
+                  >
+                    by the&nbsp;
+                  </motion.span>
+                </span>
+                <span className="inline-block overflow-hidden align-bottom">
+                  <motion.span
+                    className="inline-block font-fraunces italic font-normal text-[var(--accent)]"
+                    initial={{ y: '110%' }}
+                    animate={heroIn ? { y: 0 } : { y: '110%' }}
+                    transition={{ duration: 1.0, delay: 0.44, ease }}
+                  >
+                    cross.
+                  </motion.span>
+                </span>
+              </span>
+            </h1>
 
-              <BlurIn delay={0.2}>
-                <h1 className="text-[clamp(2.5rem,8vw,7rem)] font-display font-bold tracking-[-0.04em] leading-[0.9] text-[var(--text-primary)] mb-6 sm:mb-8">
-                  Inspired<br />
-                  By The<br />
-                  <span className="font-serif italic font-normal text-[var(--accent)]">Cross</span>
-                </h1>
-              </BlurIn>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={heroIn ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.65, ease }}
+              className="mt-10 text-base sm:text-lg leading-relaxed text-[var(--text-primary)] max-w-xl"
+            >
+              A mobile-first faith platform with daily devotionals, scripture, and
+              community prayer. Native iOS, scalable backend, shipped end to end.
+            </motion.p>
 
-              <FadeUp delay={0.4}>
-                <p className="text-base sm:text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed max-w-xl mb-8 sm:mb-10">
-                  A digital sanctuary designed to deepen your spiritual journey. Daily devotionals, community prayer, and wisdom — all in your pocket.
-                </p>
-              </FadeUp>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={heroIn ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.8, ease }}
+              className="mt-10 flex flex-wrap items-center gap-4"
+            >
+              <EditorialButton
+                href="https://apps.apple.com/us/app/inspired-by-the-cross/id6742165428"
+                target="_blank"
+              >
+                Download iOS
+              </EditorialButton>
+              <a
+                href="https://inspiredbythecross.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors underline-offset-4 hover:underline"
+              >
+                Visit website ↗
+              </a>
+            </motion.div>
+          </div>
 
-              <FadeUp delay={0.6} className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-                <motion.button
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.96 }}
-                  onClick={() => window.open('https://apps.apple.com/us/app/inspired-by-the-cross/id6742165428', '_blank')}
-                  className="group flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-[var(--accent)] text-[var(--bg-base)] font-bold text-sm hover:brightness-110 transition-all"
-                >
-                  <Download size={18} />
-                  Download for iOS
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                </motion.button>
-                <motion.a
-                  href="https://inspiredbythecross.com"
-                  target="_blank"
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.96 }}
-                  className="flex items-center gap-2 px-6 py-3 sm:py-4 rounded-full border border-[var(--text-muted)] text-[var(--text-secondary)] font-semibold text-sm hover:border-[var(--text-primary)] hover:text-[var(--text-primary)] transition-all"
-                >
-                  Visit Website
-                  <ExternalLink size={16} />
-                </motion.a>
-              </FadeUp>
-            </div>
-
-            {/* Phone Mockup */}
-            <FadeUp delay={0.3} className="flex-shrink-0">
-              <div className="relative">
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.8, ease }}
-                  className="relative z-10"
-                >
-                  <div className="w-[220px] sm:w-[280px] md:w-[320px] bg-surface-200 border-[5px] sm:border-[6px] border-surface-300 rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl" style={{ aspectRatio: '390/844' }}>
-                    <img src="/inspired-mobile-screenshot.png" alt="Inspired By The Cross app showing daily Bible verse and devotional content" className="w-full h-full object-cover" loading="eager" width={390} height={844} />
-                  </div>
-                </motion.div>
-
-                <FloatingElement className="absolute -bottom-4 -left-6 sm:-left-10 p-3 sm:p-4 rounded-[1rem] sm:rounded-[1.25rem] border border-[var(--glass-border)] bg-surface-50 shadow-xl max-w-[180px] sm:max-w-[200px] hidden md:block" duration={7} distance={10}>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Quote size={12} className="text-[var(--accent)]" />
-                    <span className="text-[10px] font-bold text-[var(--accent)] tracking-wider uppercase">Verse of the Day</span>
-                  </div>
-                  <p className="text-[var(--text-secondary)] text-xs italic leading-relaxed">"I will take you as my own people, and I will be your God."</p>
-                  <p className="text-[var(--text-muted)] text-[10px] mt-1.5 tracking-wide">EXODUS 6:7</p>
-                </FloatingElement>
+          {/* Right: phone mock */}
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            animate={heroIn ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1.2, delay: 0.4, ease }}
+            className="lg:col-span-5 flex justify-center lg:justify-end"
+          >
+            <div className="relative">
+              <div className="relative w-[220px] sm:w-[280px] md:w-[320px] bg-[var(--bg-100)] border-[6px] border-[var(--bg-200)] rounded-[2.2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl shadow-black/50" style={{ aspectRatio: '390/844' }}>
+                <img
+                  src="/inspired-mobile-screenshot.png"
+                  alt="Inspired By The Cross app showing daily Bible verse"
+                  className="w-full h-full object-cover"
+                />
               </div>
-            </FadeUp>
+              {/* soft neutral halo (theme-aware) */}
+              <div
+                className="absolute -inset-10 -z-10 blur-3xl rounded-full"
+                style={{ background: 'var(--accent-soft)' }}
+              />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Features ─────────────────────────────── */}
+      <section className="relative py-32 sm:py-48 overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--glass-border-strong)] to-transparent" />
+
+        <div className="relative max-w-[100rem] mx-auto px-6 sm:px-10 lg:px-16">
+          <FeatureHeader />
+
+          <div className="mt-20 sm:mt-32 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
+            {features.map((f, i) => (
+              <FeatureCard key={f.num} feature={f} index={i} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="relative py-20 sm:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-surface" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--glass-border)] to-transparent" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          <FadeUp className="mb-14 sm:mb-20">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-2 h-2 rounded-full bg-[var(--accent)]" />
-              <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[var(--text-muted)]">Features</span>
-            </div>
-            <h2 className="text-[clamp(2rem,5vw,4.5rem)] font-display font-bold text-[var(--text-primary)] tracking-[-0.03em] leading-[0.95]">
-              Everything your faith<br />journey <span className="font-serif italic font-normal text-[var(--accent)]">needs.</span>
-            </h2>
-          </FadeUp>
-
-          <Stagger className="grid md:grid-cols-2 gap-4 sm:gap-6" staggerDelay={0.1}>
-            {features.map((f, i) => (
-              <StaggerItem key={i}>
-                <TiltCard
-                  className="group p-6 sm:p-8 md:p-10 rounded-[1.25rem] sm:rounded-[1.5rem] border border-[var(--glass-border)] bg-surface-50 hover:border-[var(--glass-border-strong)] transition-all h-full"
-                  intensity={10}
-                >
-                  <div className={`${f.color} mb-5 group-hover:scale-110 transition-transform origin-left`} style={{ transform: 'translateZ(25px)' }}>{f.icon}</div>
-                  <h3 className="text-xl sm:text-2xl font-display font-bold text-[var(--text-primary)] mb-3 tracking-tight" style={{ transform: 'translateZ(15px)' }}>{f.title}</h3>
-                  <p className="text-[var(--text-secondary)] leading-relaxed text-sm sm:text-base" style={{ transform: 'translateZ(8px)' }}>{f.desc}</p>
-                </TiltCard>
-              </StaggerItem>
-            ))}
-          </Stagger>
+      {/* ── Quote ────────────────────────────────── */}
+      <section className="relative py-32 sm:py-48 overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--glass-border-strong)] to-transparent" />
+        <div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] rounded-full pointer-events-none opacity-[0.04] blur-3xl"
+          style={{ background: 'var(--accent)' }}
+        />
+        <div className="relative max-w-5xl mx-auto px-6 sm:px-10 text-center">
+          <Blockquote />
         </div>
       </section>
 
-      {/* Quote */}
-      <section className="relative py-20 sm:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-surface" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--glass-border)] to-transparent" />
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-          <FadeUp>
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[var(--accent-soft)] flex items-center justify-center mx-auto mb-8 sm:mb-10">
-              <Heart size={24} className="text-[var(--accent)]" />
-            </div>
-            <blockquote className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-[var(--text-primary)] tracking-[-0.02em] leading-[1.15] mb-6 sm:mb-8">
-              "Faith is not about having all the answers. It's about <span className="font-serif italic font-normal text-[var(--accent)]">trusting the journey.</span>"
-            </blockquote>
-            <p className="text-[var(--text-muted)] text-base sm:text-lg">Built with love for the global faith community.</p>
-          </FadeUp>
+      {/* ── CTA ──────────────────────────────────── */}
+      <section className="relative py-32 sm:py-48 overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--glass-border-strong)] to-transparent" />
+        <div className="relative max-w-[100rem] mx-auto px-6 sm:px-10 lg:px-16 text-center flex flex-col items-center gap-10">
+          <CTAHeadline />
         </div>
       </section>
+    </div>
+  );
+};
 
-      {/* CTA */}
-      <section className="relative py-20 sm:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-surface" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--glass-border)] to-transparent" />
+const FeatureHeader: React.FC = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-20%' });
+  return (
+    <div ref={ref} className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="lg:col-span-3 pt-4">
+        <EyebrowLabel>Features / 04</EyebrowLabel>
+      </div>
+      <h2 className="lg:col-span-9 font-editorial font-extrabold leading-[0.92] tracking-[-0.04em] text-[var(--text-primary)] text-[clamp(2.5rem,6.5vw,6rem)]">
+        <span className="inline-block overflow-hidden align-bottom">
+          <motion.span
+            className="inline-block"
+            initial={{ y: '110%' }}
+            animate={inView ? { y: 0 } : { y: '110%' }}
+            transition={{ duration: 0.95, delay: 0.15, ease }}
+          >
+            Everything your faith
+          </motion.span>
+        </span>
+        <br />
+        <span className="inline-block overflow-hidden align-bottom">
+          <motion.span
+            className="inline-block"
+            initial={{ y: '110%' }}
+            animate={inView ? { y: 0 } : { y: '110%' }}
+            transition={{ duration: 0.95, delay: 0.3, ease }}
+          >
+            journey&nbsp;
+          </motion.span>
+        </span>
+        <span className="inline-block overflow-hidden align-bottom">
+          <motion.span
+            className="inline-block font-fraunces italic font-normal text-[var(--accent)]"
+            initial={{ y: '110%' }}
+            animate={inView ? { y: 0 } : { y: '110%' }}
+            transition={{ duration: 0.95, delay: 0.42, ease }}
+          >
+            needs.
+          </motion.span>
+        </span>
+      </h2>
+    </div>
+  );
+};
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-          <FadeUp>
-            <h2 className="text-[clamp(2rem,5vw,4rem)] font-display font-bold text-[var(--text-primary)] tracking-[-0.03em] mb-4 sm:mb-6">
-              Start your journey <span className="font-serif italic font-normal text-[var(--accent)]">today.</span>
-            </h2>
-            <p className="text-base sm:text-lg md:text-xl text-[var(--text-secondary)] mb-8 sm:mb-10 max-w-lg mx-auto">
-              Free on the App Store. Your spiritual companion awaits.
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => window.open('https://apps.apple.com/us/app/inspired-by-the-cross/id6742165428', '_blank')}
-              className="group inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 rounded-full bg-[var(--accent)] text-[var(--bg-base)] font-bold text-base sm:text-lg hover:brightness-110 transition-all"
-            >
-              <Download size={20} />
-              Get the App
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </motion.button>
-          </FadeUp>
-        </div>
-      </section>
+const FeatureCard: React.FC<{
+  feature: { num: string; icon: React.ReactNode; title: string; desc: string };
+  index: number;
+}> = ({ feature, index }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-15%' });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 60 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.9, delay: index * 0.08, ease }}
+      className="group relative rounded-[1.5rem] border border-[var(--glass-border-strong)] bg-[var(--bg-100)]/50 backdrop-blur-xl p-8 sm:p-10 hover:border-[var(--accent)]/40 transition-all duration-500"
+    >
+      <div className="flex items-start justify-between mb-8">
+        <div className="text-[var(--accent)]">{feature.icon}</div>
+        <span className="font-mono text-xs tracking-wider text-[var(--text-muted)]">
+          / {feature.num}
+        </span>
+      </div>
+      <h3 className="font-editorial font-bold text-[var(--text-primary)] text-2xl sm:text-3xl mb-4 tracking-tight">
+        {feature.title}
+      </h3>
+      <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
+        {feature.desc}
+      </p>
+    </motion.div>
+  );
+};
+
+const Blockquote: React.FC = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-20%' });
+  return (
+    <div ref={ref}>
+      <EyebrowLabel className="justify-center mb-8 inline-flex">A note</EyebrowLabel>
+      <blockquote className="font-editorial font-extrabold text-[clamp(1.8rem,4.5vw,4rem)] leading-[1.1] tracking-[-0.025em] text-[var(--text-primary)] max-w-4xl mx-auto">
+        <span className="inline-block overflow-hidden align-bottom">
+          <motion.span
+            className="inline-block"
+            initial={{ y: '110%' }}
+            animate={inView ? { y: 0 } : { y: '110%' }}
+            transition={{ duration: 0.95, delay: 0.1, ease }}
+          >
+            "Faith is not about having&nbsp;
+          </motion.span>
+        </span>
+        <span className="inline-block overflow-hidden align-bottom">
+          <motion.span
+            className="inline-block"
+            initial={{ y: '110%' }}
+            animate={inView ? { y: 0 } : { y: '110%' }}
+            transition={{ duration: 0.95, delay: 0.25, ease }}
+          >
+            all the answers.
+          </motion.span>
+        </span>
+        <br />
+        <span className="inline-block overflow-hidden align-bottom">
+          <motion.span
+            className="inline-block"
+            initial={{ y: '110%' }}
+            animate={inView ? { y: 0 } : { y: '110%' }}
+            transition={{ duration: 0.95, delay: 0.4, ease }}
+          >
+            It's about&nbsp;
+          </motion.span>
+        </span>
+        <span className="inline-block overflow-hidden align-bottom">
+          <motion.span
+            className="inline-block font-fraunces italic font-normal text-[var(--accent)]"
+            initial={{ y: '110%' }}
+            animate={inView ? { y: 0 } : { y: '110%' }}
+            transition={{ duration: 0.95, delay: 0.55, ease }}
+          >
+            trusting the journey."
+          </motion.span>
+        </span>
+      </blockquote>
+      <p className="mt-10 text-sm tracking-[0.2em] uppercase text-[var(--text-muted)]">
+        Built with love for the global faith community
+      </p>
+    </div>
+  );
+};
+
+const CTAHeadline: React.FC = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-20%' });
+  return (
+    <div ref={ref} className="flex flex-col items-center gap-10">
+      <EyebrowLabel>Get the App</EyebrowLabel>
+      <h2 className="font-editorial font-extrabold leading-[0.9] tracking-[-0.045em] text-[var(--text-primary)] text-[clamp(2.8rem,8vw,8rem)] max-w-[18ch]">
+        <span className="inline-block overflow-hidden align-bottom">
+          <motion.span
+            className="inline-block"
+            initial={{ y: '110%' }}
+            animate={inView ? { y: 0 } : { y: '110%' }}
+            transition={{ duration: 0.95, delay: 0.15, ease }}
+          >
+            Start your journey&nbsp;
+          </motion.span>
+        </span>
+        <span className="inline-block overflow-hidden align-bottom">
+          <motion.span
+            className="inline-block font-fraunces italic font-normal text-[var(--accent)]"
+            initial={{ y: '110%' }}
+            animate={inView ? { y: 0 } : { y: '110%' }}
+            transition={{ duration: 0.95, delay: 0.3, ease }}
+          >
+            today.
+          </motion.span>
+        </span>
+      </h2>
+      <p className="text-base sm:text-lg text-[var(--text-primary)] max-w-md">
+        Free on the App Store. Available on iPhone and iPad.
+      </p>
+      <EditorialButton
+        href="https://apps.apple.com/us/app/inspired-by-the-cross/id6742165428"
+        target="_blank"
+      >
+        Download for iOS
+      </EditorialButton>
     </div>
   );
 };

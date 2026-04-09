@@ -13,22 +13,31 @@ const Footer: React.FC = () => {
         <FadeUp>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
             <div className="space-y-5">
-              <h3 className="font-display text-2xl font-bold text-[var(--text-primary)]">
-                Kaspar Works <span className="text-[var(--text-muted)]">Inc.</span>
-              </h3>
+              <div className="flex items-center gap-3">
+                <img
+                  src="/logo.png"
+                  alt=""
+                  className="h-12 w-12 object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <h3 className="font-editorial text-2xl font-extrabold tracking-[-0.02em] text-[var(--text-primary)]">
+                  kaspar<span className="text-[var(--accent)]">:</span>works
+                </h3>
+              </div>
               <p className="text-[var(--text-muted)] text-sm leading-relaxed max-w-xs">
-                A product studio building purpose-driven platforms across faith and healthcare.
+                We build high-end enterprise applications, custom websites, AI tools, and data platforms. End to end, one team.
               </p>
             </div>
 
             <div>
-              <h4 className="text-[var(--text-primary)] font-semibold mb-5 text-sm uppercase tracking-wider">Products</h4>
+              <h4 className="text-[var(--text-primary)] font-semibold mb-5 text-sm uppercase tracking-wider">Studio</h4>
               <Stagger className="space-y-3" staggerDelay={0.05}>
                 {[
-                  { name: 'About Us', href: '#about' },
+                  { name: 'Work', href: '/apps' },
                   { name: 'Inspired By The Cross', href: '/inspired' },
                   { name: 'dialysis.live', href: '/dialysis' },
-                  { name: 'Our Mission', href: '#mission' },
+                  { name: 'Process', href: '#process-rail' },
                 ].map((link) => (
                   <StaggerItem key={link.name}>
                     {link.href.startsWith('/') ? (
@@ -67,9 +76,11 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="border-t border-[var(--glass-border)] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-[var(--text-muted)]">&copy; {new Date().getFullYear()} Kaspar Works Inc. All rights reserved.</p>
+            <p className="text-xs text-[var(--text-muted)]">&copy; {new Date().getFullYear()} Kaspar Works, Inc. All rights reserved.</p>
             <div className="flex items-center gap-1 text-xs text-[var(--text-muted)]">
-              <span>Built with</span><span className="text-[var(--accent)]">purpose</span>
+              <span>Newark, DE</span>
+              <span className="mx-2 opacity-50">·</span>
+              <span>Independent since 2024</span>
             </div>
           </div>
         </FadeUp>

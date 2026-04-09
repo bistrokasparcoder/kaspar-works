@@ -11,7 +11,7 @@ const steps = [
   { id: 'name', label: "What's your name?", subtitle: "Let's get acquainted", icon: User },
   { id: 'interest', label: 'What are you building?', subtitle: 'Pick the one that fits best', icon: Lightbulb },
   { id: 'email', label: 'Where can we reach you?', subtitle: "We'll reply within 24 hours", icon: Mail },
-  { id: 'details', label: 'Paint us the picture', subtitle: 'Optional — but helps us hit the ground running', icon: MessageSquare },
+  { id: 'details', label: 'Paint us the picture', subtitle: 'Optional, but helps us hit the ground running', icon: MessageSquare },
 ];
 
 const interestOptions = [
